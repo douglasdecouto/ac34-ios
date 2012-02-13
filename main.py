@@ -3,7 +3,6 @@ from datetime import datetime
 import socket
 
 
-
 HOST      = "127.0.01"
 #HOST      = "157.125.69.155"
 LIVE_PORT = 4940
@@ -26,6 +25,19 @@ def bytes_to_num(buf):
     for i in range(len(buf) - 1, -1, -1):
         val = val*256 + ord(buf[i])
     return val
+
+def bytes_to_timestamp(buf):
+    """
+    :param buf: Buffer with 6-byte timestamp in little-endian format,
+     which is 6 bytes indicating milliseconds since 1 Jan 1970
+     (conveniently same as UNIX/Python 'epoch').  Buf must have at
+     least 6 bytes of data.
+
+    :returns: Timestamp in datetime object.
+    """
+    assert len(buf) >= 6
+    timestamp_ms = bytes_to_num(buf[:6])
+    return datetime.fromtimestamp(timestamp_ms/1000.0)
 
 def compute_crc(buf, crc_so_far=0):
     """
@@ -87,7 +99,7 @@ def msg_chatter(body):
     msg_type_str = CHATTER_TYPES.get(msg_type, "Unknown Message Type")
     msg_len = ord(body[2])
     if len(body) != msg_len + 3:
-        raise MessageException("Too few bytes in chatter message")
+        raise MessageException("Wrong number of bytes in chatter message, expected %d got %d" % (msg_len + 3, len(body)))
     
     ## Docs say chatter text is null-terminated but that's not true
     ## for the supplied test data.
@@ -121,6 +133,32 @@ def msg_display_text(body):
     # lines.
                        
 
+XML_TYPES = {
+    # Code -> Tuple of (message type name, root name)
+    5: ('Regatta', 'RegattaConfig'),
+    6: ('Race', 'Race'),
+    7: ('Boat', 'root'),
+}
+
+def msg_xml(body):
+    if len(body) < 14:
+        raise MessageException("Incomplete header in XML message")
+    msg_version = ord(body[0])
+    ack_number = bytes_to_num(body[1:3])
+    timestamp = bytes_to_timestamp(body[3:9])
+    xml_type = ord(body[9])
+    sequence_number = bytes_to_num(body[10:12])
+    msg_len = bytes_to_num(body[12:14])
+    if len(body) != 14 + msg_len:
+        raise MessageException("Wrong number of bytes in XML message, expected %d got %d" % (msg_len + 14, len(body)))
+
+    type_name, root_name = XML_TYPES.get(xml_type, ('Unknown', 'Unknown'))
+    file_name = '%s.%d.%s.xml' % (type_name, sequence_number, timestamp)
+    print "Writing XML data to %s" % file_name
+    f = open(file_name, 'w')
+    f.write(body[14:-1]) # XML data _is_ null-terminated, don't write the 0 terminator.
+    f.close()
+
 
 # Message types. Dict of:
 #    type code -> tuple of (short name, long name, handler function)
@@ -128,7 +166,7 @@ MESSAGE_TYPES = {
     1:  ("MT_HEARTBEAT", "Heartbeat", msg_heartbeat),
     12: ("MT_RACE_START_STATUS", "Race Status", msg_race_status),
     20: ("MT_DISPLAY_TEXT", "Display Text Message", msg_display_text),
-    26: ("MT_XML_MESSAGE", "XML Message", msg_nop),
+    26: ("MT_XML_MESSAGE", "XML Message", msg_xml),
     27: ("MT_RACE_START_STATUS", "Race Start Status", msg_nop),
     29: ("MT_YACHT_EVENT", "Yacht Event Code", msg_nop),
     31: ("MT_YACHT_ACTION", "Yacht Action Code", msg_nop),
@@ -158,16 +196,9 @@ def main():
             raise Exception("Bad sync bytes 0x%x 0x%x" % (ord(hdr[0]), ord(hdr[1])))
 
         msg_type = ord(hdr[2])
-
-        # Read timestamp, which is 6 byes indicating ms since 1 Jan
-        # 1970 (conveniently same as UNIX/Python 'epoch').
-        timestamp_ms = bytes_to_num(hdr[3:9])
-        timestamp = datetime.fromtimestamp(timestamp_ms/1000.0)
-
+        timestamp = bytes_to_timestamp(hdr[3:9])
         source_id = bytes_to_num(hdr[9:13])
-        
-        # Length of body of message
-        msg_len = bytes_to_num(hdr[13:15])
+        msg_len = bytes_to_num(hdr[13:15]) # Length of following message body
 
         short_type_str, long_type_str, msg_func = \
             MESSAGE_TYPES.get(msg_type, ("UNKNOWN", "Unknown Message Type", msg_nop))
