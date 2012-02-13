@@ -1,0 +1,468 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		68D0AFC314E8831A0084988D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D0AFC214E8831A0084988D /* UIKit.framework */; };
+		68D0AFC514E8831A0084988D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D0AFC414E8831A0084988D /* Foundation.framework */; };
+		68D0AFC714E8831A0084988D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D0AFC614E8831A0084988D /* CoreGraphics.framework */; };
+		68D0AFCD14E8831A0084988D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68D0AFCB14E8831A0084988D /* InfoPlist.strings */; };
+		68D0AFCF14E8831A0084988D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D0AFCE14E8831A0084988D /* main.m */; };
+		68D0AFD314E8831A0084988D /* AC34AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D0AFD214E8831A0084988D /* AC34AppDelegate.m */; };
+		68D0AFD614E8831A0084988D /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68D0AFD414E8831A0084988D /* MainStoryboard.storyboard */; };
+		68D0AFD914E8831A0084988D /* AC34FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D0AFD814E8831A0084988D /* AC34FirstViewController.m */; };
+		68D0AFDB14E8831A0084988D /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D0AFDA14E8831A0084988D /* first.png */; };
+		68D0AFDD14E8831A0084988D /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D0AFDC14E8831A0084988D /* first@2x.png */; };
+		68D0AFE014E8831A0084988D /* AC34SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D0AFDF14E8831A0084988D /* AC34SecondViewController.m */; };
+		68D0AFE214E8831A0084988D /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D0AFE114E8831A0084988D /* second.png */; };
+		68D0AFE414E8831A0084988D /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D0AFE314E8831A0084988D /* second@2x.png */; };
+		68D0AFEC14E8831A0084988D /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D0AFEB14E8831A0084988D /* SenTestingKit.framework */; };
+		68D0AFED14E8831A0084988D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D0AFC214E8831A0084988D /* UIKit.framework */; };
+		68D0AFEE14E8831A0084988D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D0AFC414E8831A0084988D /* Foundation.framework */; };
+		68D0AFF614E8831A0084988D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68D0AFF414E8831A0084988D /* InfoPlist.strings */; };
+		68D0AFF914E8831A0084988D /* AC_34_ViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D0AFF814E8831A0084988D /* AC_34_ViewerTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		68D0AFEF14E8831A0084988D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 68D0AFB514E8831A0084988D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68D0AFBD14E8831A0084988D;
+			remoteInfo = "AC 34 Viewer";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		68D0AFBE14E8831A0084988D /* AC 34 Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AC 34 Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		68D0AFC214E8831A0084988D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		68D0AFC414E8831A0084988D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		68D0AFC614E8831A0084988D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		68D0AFCA14E8831A0084988D /* AC 34 Viewer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AC 34 Viewer-Info.plist"; sourceTree = "<group>"; };
+		68D0AFCC14E8831A0084988D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		68D0AFCE14E8831A0084988D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		68D0AFD014E8831A0084988D /* AC 34 Viewer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AC 34 Viewer-Prefix.pch"; sourceTree = "<group>"; };
+		68D0AFD114E8831A0084988D /* AC34AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AC34AppDelegate.h; sourceTree = "<group>"; };
+		68D0AFD214E8831A0084988D /* AC34AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AC34AppDelegate.m; sourceTree = "<group>"; };
+		68D0AFD514E8831A0084988D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		68D0AFD714E8831A0084988D /* AC34FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AC34FirstViewController.h; sourceTree = "<group>"; };
+		68D0AFD814E8831A0084988D /* AC34FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AC34FirstViewController.m; sourceTree = "<group>"; };
+		68D0AFDA14E8831A0084988D /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		68D0AFDC14E8831A0084988D /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		68D0AFDE14E8831A0084988D /* AC34SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AC34SecondViewController.h; sourceTree = "<group>"; };
+		68D0AFDF14E8831A0084988D /* AC34SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AC34SecondViewController.m; sourceTree = "<group>"; };
+		68D0AFE114E8831A0084988D /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		68D0AFE314E8831A0084988D /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		68D0AFEA14E8831A0084988D /* AC 34 ViewerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AC 34 ViewerTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		68D0AFEB14E8831A0084988D /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		68D0AFF314E8831A0084988D /* AC 34 ViewerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AC 34 ViewerTests-Info.plist"; sourceTree = "<group>"; };
+		68D0AFF514E8831A0084988D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		68D0AFF714E8831A0084988D /* AC_34_ViewerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AC_34_ViewerTests.h; sourceTree = "<group>"; };
+		68D0AFF814E8831A0084988D /* AC_34_ViewerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AC_34_ViewerTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		68D0AFBB14E8831A0084988D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68D0AFC314E8831A0084988D /* UIKit.framework in Frameworks */,
+				68D0AFC514E8831A0084988D /* Foundation.framework in Frameworks */,
+				68D0AFC714E8831A0084988D /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68D0AFE614E8831A0084988D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68D0AFEC14E8831A0084988D /* SenTestingKit.framework in Frameworks */,
+				68D0AFED14E8831A0084988D /* UIKit.framework in Frameworks */,
+				68D0AFEE14E8831A0084988D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		68D0AFB314E8831A0084988D = {
+			isa = PBXGroup;
+			children = (
+				68D0AFC814E8831A0084988D /* AC 34 Viewer */,
+				68D0AFF114E8831A0084988D /* AC 34 ViewerTests */,
+				68D0AFC114E8831A0084988D /* Frameworks */,
+				68D0AFBF14E8831A0084988D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		68D0AFBF14E8831A0084988D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				68D0AFBE14E8831A0084988D /* AC 34 Viewer.app */,
+				68D0AFEA14E8831A0084988D /* AC 34 ViewerTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		68D0AFC114E8831A0084988D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				68D0AFC214E8831A0084988D /* UIKit.framework */,
+				68D0AFC414E8831A0084988D /* Foundation.framework */,
+				68D0AFC614E8831A0084988D /* CoreGraphics.framework */,
+				68D0AFEB14E8831A0084988D /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		68D0AFC814E8831A0084988D /* AC 34 Viewer */ = {
+			isa = PBXGroup;
+			children = (
+				68D0AFD114E8831A0084988D /* AC34AppDelegate.h */,
+				68D0AFD214E8831A0084988D /* AC34AppDelegate.m */,
+				68D0AFD414E8831A0084988D /* MainStoryboard.storyboard */,
+				68D0AFD714E8831A0084988D /* AC34FirstViewController.h */,
+				68D0AFD814E8831A0084988D /* AC34FirstViewController.m */,
+				68D0AFDA14E8831A0084988D /* first.png */,
+				68D0AFDC14E8831A0084988D /* first@2x.png */,
+				68D0AFDE14E8831A0084988D /* AC34SecondViewController.h */,
+				68D0AFDF14E8831A0084988D /* AC34SecondViewController.m */,
+				68D0AFE114E8831A0084988D /* second.png */,
+				68D0AFE314E8831A0084988D /* second@2x.png */,
+				68D0AFC914E8831A0084988D /* Supporting Files */,
+			);
+			path = "AC 34 Viewer";
+			sourceTree = "<group>";
+		};
+		68D0AFC914E8831A0084988D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				68D0AFCA14E8831A0084988D /* AC 34 Viewer-Info.plist */,
+				68D0AFCB14E8831A0084988D /* InfoPlist.strings */,
+				68D0AFCE14E8831A0084988D /* main.m */,
+				68D0AFD014E8831A0084988D /* AC 34 Viewer-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		68D0AFF114E8831A0084988D /* AC 34 ViewerTests */ = {
+			isa = PBXGroup;
+			children = (
+				68D0AFF714E8831A0084988D /* AC_34_ViewerTests.h */,
+				68D0AFF814E8831A0084988D /* AC_34_ViewerTests.m */,
+				68D0AFF214E8831A0084988D /* Supporting Files */,
+			);
+			path = "AC 34 ViewerTests";
+			sourceTree = "<group>";
+		};
+		68D0AFF214E8831A0084988D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				68D0AFF314E8831A0084988D /* AC 34 ViewerTests-Info.plist */,
+				68D0AFF414E8831A0084988D /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		68D0AFBD14E8831A0084988D /* AC 34 Viewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68D0AFFC14E8831A0084988D /* Build configuration list for PBXNativeTarget "AC 34 Viewer" */;
+			buildPhases = (
+				68D0AFBA14E8831A0084988D /* Sources */,
+				68D0AFBB14E8831A0084988D /* Frameworks */,
+				68D0AFBC14E8831A0084988D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "AC 34 Viewer";
+			productName = "AC 34 Viewer";
+			productReference = 68D0AFBE14E8831A0084988D /* AC 34 Viewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		68D0AFE914E8831A0084988D /* AC 34 ViewerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68D0AFFF14E8831A0084988D /* Build configuration list for PBXNativeTarget "AC 34 ViewerTests" */;
+			buildPhases = (
+				68D0AFE514E8831A0084988D /* Sources */,
+				68D0AFE614E8831A0084988D /* Frameworks */,
+				68D0AFE714E8831A0084988D /* Resources */,
+				68D0AFE814E8831A0084988D /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				68D0AFF014E8831A0084988D /* PBXTargetDependency */,
+			);
+			name = "AC 34 ViewerTests";
+			productName = "AC 34 ViewerTests";
+			productReference = 68D0AFEA14E8831A0084988D /* AC 34 ViewerTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		68D0AFB514E8831A0084988D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 68D0AFB814E8831A0084988D /* Build configuration list for PBXProject "AC 34 Viewer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 68D0AFB314E8831A0084988D;
+			productRefGroup = 68D0AFBF14E8831A0084988D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				68D0AFBD14E8831A0084988D /* AC 34 Viewer */,
+				68D0AFE914E8831A0084988D /* AC 34 ViewerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		68D0AFBC14E8831A0084988D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68D0AFCD14E8831A0084988D /* InfoPlist.strings in Resources */,
+				68D0AFD614E8831A0084988D /* MainStoryboard.storyboard in Resources */,
+				68D0AFDB14E8831A0084988D /* first.png in Resources */,
+				68D0AFDD14E8831A0084988D /* first@2x.png in Resources */,
+				68D0AFE214E8831A0084988D /* second.png in Resources */,
+				68D0AFE414E8831A0084988D /* second@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68D0AFE714E8831A0084988D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68D0AFF614E8831A0084988D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		68D0AFE814E8831A0084988D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		68D0AFBA14E8831A0084988D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68D0AFCF14E8831A0084988D /* main.m in Sources */,
+				68D0AFD314E8831A0084988D /* AC34AppDelegate.m in Sources */,
+				68D0AFD914E8831A0084988D /* AC34FirstViewController.m in Sources */,
+				68D0AFE014E8831A0084988D /* AC34SecondViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68D0AFE514E8831A0084988D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68D0AFF914E8831A0084988D /* AC_34_ViewerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		68D0AFF014E8831A0084988D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 68D0AFBD14E8831A0084988D /* AC 34 Viewer */;
+			targetProxy = 68D0AFEF14E8831A0084988D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		68D0AFCB14E8831A0084988D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68D0AFCC14E8831A0084988D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		68D0AFD414E8831A0084988D /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68D0AFD514E8831A0084988D /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		68D0AFF414E8831A0084988D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68D0AFF514E8831A0084988D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		68D0AFFA14E8831A0084988D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		68D0AFFB14E8831A0084988D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		68D0AFFD14E8831A0084988D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AC 34 Viewer/AC 34 Viewer-Prefix.pch";
+				INFOPLIST_FILE = "AC 34 Viewer/AC 34 Viewer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		68D0AFFE14E8831A0084988D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AC 34 Viewer/AC 34 Viewer-Prefix.pch";
+				INFOPLIST_FILE = "AC 34 Viewer/AC 34 Viewer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		68D0B00014E8831A0084988D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AC 34 Viewer.app/AC 34 Viewer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AC 34 Viewer/AC 34 Viewer-Prefix.pch";
+				INFOPLIST_FILE = "AC 34 ViewerTests/AC 34 ViewerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		68D0B00114E8831A0084988D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AC 34 Viewer.app/AC 34 Viewer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AC 34 Viewer/AC 34 Viewer-Prefix.pch";
+				INFOPLIST_FILE = "AC 34 ViewerTests/AC 34 ViewerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		68D0AFB814E8831A0084988D /* Build configuration list for PBXProject "AC 34 Viewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68D0AFFA14E8831A0084988D /* Debug */,
+				68D0AFFB14E8831A0084988D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68D0AFFC14E8831A0084988D /* Build configuration list for PBXNativeTarget "AC 34 Viewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68D0AFFD14E8831A0084988D /* Debug */,
+				68D0AFFE14E8831A0084988D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		68D0AFFF14E8831A0084988D /* Build configuration list for PBXNativeTarget "AC 34 ViewerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68D0B00014E8831A0084988D /* Debug */,
+				68D0B00114E8831A0084988D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 68D0AFB514E8831A0084988D /* Project object */;
+}
