@@ -1,18 +1,18 @@
 //
-//  AC34SecondViewController.m
+//  AC34ThirdViewController.m
 //  AC 34 Viewer
 //
-//  Created by Douglas De Couto on 2012-02-12.
+//  Created by Douglas De Couto on 2012-02-13.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "AC34SecondViewController.h"
-#import "AC34BoatDataController.h"
-#import "AC34Boat.h"
+#import "AC34ThirdViewController.h"
 
-@implementation AC34SecondViewController
+@implementation AC34ThirdViewController
 
-@synthesize dataController = _dataController;
+@synthesize textField=_textField;
+@synthesize theLabel=_theLabel;
+@synthesize userName=_userName;
 
 - (void)didReceiveMemoryWarning
 {
@@ -30,6 +30,8 @@
 
 - (void)viewDidUnload
 {
+    [self setTextField:nil];
+    [self setTheLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -61,23 +63,22 @@
     return YES;
 }
 
-// Table view delegate code.
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.dataController countOfList];
+- (IBAction)clickMe:(id)sender 
+{
+    NSLog(@"Oh yeah, it's clicking now!");
+    self.userName = self.textField.text;
+    NSString *nameString = self.userName;
+    if ([nameString length] == 0)
+        nameString = @"Blankety Blank!";
+    NSString *greeting = [[NSString alloc] initWithFormat:@"Hello, %@!", nameString];
+    self.theLabel.text = greeting;
+
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *__strong)indexPath {
-    
-    static NSString *CellIdentifier = @"BoatCell"; // Must match template cell ID in inspector
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    NSLog(@"cellForRowAt %d", indexPath.row);
-    
-    AC34Boat *boatAtIndex = [self.dataController objectInListAtIndex:indexPath.row];
-    [[cell textLabel] setText:boatAtIndex.name];
-    
-    [[cell detailTextLabel] setText:@"Fake detail text"];    
-    return cell;
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
+    if (theTextField == self.textField) {
+        [theTextField resignFirstResponder];
+    }
+    return YES;
 }
-
 @end

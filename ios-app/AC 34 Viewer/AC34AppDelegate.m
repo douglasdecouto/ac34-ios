@@ -9,14 +9,28 @@
 #import <Foundation/Foundation.h>
 
 #import "AC34AppDelegate.h"
+#import "AC34SecondViewController.h"
+#import "AC34BoatDataController.h"
+#import "AC34StreamHandler.h"
 
 @implementation AC34AppDelegate
 
 @synthesize window = _window;
+@synthesize streamHandler = _streamHandler;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    // Override point for customization after application launch.
+{  
+    // Setup the "Second view controller" for tab 2 with a boat list data controller.
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    
+    // Note: we know the "SecondViewController" ias at index 1.
+    AC34SecondViewController *secondViewController = (AC34SecondViewController *)[[navigationController viewControllers] objectAtIndex:1];
+    
+    NSString *className = NSStringFromClass([secondViewController class]); 
+    NSLog(@"Second controller class name %@", className);
+    
+    AC34BoatDataController *aDataController = [[AC34BoatDataController alloc] init];
+    secondViewController.dataController = aDataController;
     return YES;
 }
 							
@@ -48,12 +62,8 @@
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
-    CFStreamCreatePairWithSocketToHost(NULL, CFSTR("localhost"), 4941, 
-									   &self->readStream, &self->writeStream);
-	NSInputStream *inputStream = (__bridge NSInputStream *) self->readStream;
-	[inputStream setDelegate:self];
-	[inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-	[inputStream open];
+    self.streamHandler = [[AC34StreamHandler alloc] init];
+    [self.streamHandler connectToServer:@"localhost" port:4941];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -63,38 +73,6 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
-}
-
-- (void) stream:(NSStream *)theStream handleEvent:(NSStreamEvent) streamEvent {
-	/* Handle a stream event */
-	switch (streamEvent) {
-        case NSStreamEventHasBytesAvailable:
-            /* Do read */
-            break;
-            
-        case NSStreamEventEndEncountered:
-            /* Close it up */
-            break;
-            
-            /* The following events aren't handled */
-        case NSStreamEventHasSpaceAvailable:
-        case NSStreamEventNone: 
-        case NSStreamEventOpenCompleted:
-            break;
-            
-        case NSStreamEventErrorOccurred: {
-            /* Handle stream errors, e.g. couldn't connect to host, etc. */
-            NSError *theError = [theStream streamError];
-            NSLog([NSString stringWithFormat:@"Error reading stream (%i): %@",
-                   [theError code], [theError localizedDescription]]);
-            
-            [theStream close];
-        }
-            break;
-            
-        default:
-            assert(0);
-	}	
 }
 
 

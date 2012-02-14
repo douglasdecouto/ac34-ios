@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AC34SecondViewController : UIViewController
+@class AC34BoatDataController;
+
+@interface AC34SecondViewController : UITableViewController 
+
+@property (nonatomic, retain) AC34BoatDataController *dataController;
 
 @end

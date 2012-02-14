@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6895378414E96A6A0026F4CC /* AC34ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6895378214E96A6A0026F4CC /* AC34ThirdViewController.m */; };
+		6895378D14E9AE470026F4CC /* AC34Boat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6895378C14E9AE470026F4CC /* AC34Boat.m */; };
+		68BFCF2614E9CF0500ADD815 /* AC34StreamHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BFCF2514E9CF0500ADD815 /* AC34StreamHandler.m */; };
+		68BFCF2914EA063B00ADD815 /* AC34BoatDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BFCF2814EA063B00ADD815 /* AC34BoatDataController.m */; };
 		68D0AFC314E8831A0084988D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D0AFC214E8831A0084988D /* UIKit.framework */; };
 		68D0AFC514E8831A0084988D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D0AFC414E8831A0084988D /* Foundation.framework */; };
 		68D0AFC714E8831A0084988D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D0AFC614E8831A0084988D /* CoreGraphics.framework */; };
@@ -38,6 +42,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6895378114E96A6A0026F4CC /* AC34ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AC34ThirdViewController.h; sourceTree = "<group>"; };
+		6895378214E96A6A0026F4CC /* AC34ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AC34ThirdViewController.m; sourceTree = "<group>"; };
+		6895378B14E9AE470026F4CC /* AC34Boat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AC34Boat.h; sourceTree = "<group>"; };
+		6895378C14E9AE470026F4CC /* AC34Boat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AC34Boat.m; sourceTree = "<group>"; };
+		68BFCF2414E9CF0500ADD815 /* AC34StreamHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AC34StreamHandler.h; sourceTree = "<group>"; };
+		68BFCF2514E9CF0500ADD815 /* AC34StreamHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AC34StreamHandler.m; sourceTree = "<group>"; };
+		68BFCF2714EA063B00ADD815 /* AC34BoatDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AC34BoatDataController.h; sourceTree = "<group>"; };
+		68BFCF2814EA063B00ADD815 /* AC34BoatDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AC34BoatDataController.m; sourceTree = "<group>"; };
 		68D0AFBE14E8831A0084988D /* AC 34 Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AC 34 Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68D0AFC214E8831A0084988D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		68D0AFC414E8831A0084988D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -122,9 +134,15 @@
 		68D0AFC814E8831A0084988D /* AC 34 Viewer */ = {
 			isa = PBXGroup;
 			children = (
+				68BFCF2714EA063B00ADD815 /* AC34BoatDataController.h */,
+				68BFCF2814EA063B00ADD815 /* AC34BoatDataController.m */,
 				68D0AFD114E8831A0084988D /* AC34AppDelegate.h */,
 				68D0AFD214E8831A0084988D /* AC34AppDelegate.m */,
+				68BFCF2414E9CF0500ADD815 /* AC34StreamHandler.h */,
+				68BFCF2514E9CF0500ADD815 /* AC34StreamHandler.m */,
 				68D0AFD414E8831A0084988D /* MainStoryboard.storyboard */,
+				6895378B14E9AE470026F4CC /* AC34Boat.h */,
+				6895378C14E9AE470026F4CC /* AC34Boat.m */,
 				68D0AFD714E8831A0084988D /* AC34FirstViewController.h */,
 				68D0AFD814E8831A0084988D /* AC34FirstViewController.m */,
 				68D0AFDA14E8831A0084988D /* first.png */,
@@ -133,6 +151,8 @@
 				68D0AFDF14E8831A0084988D /* AC34SecondViewController.m */,
 				68D0AFE114E8831A0084988D /* second.png */,
 				68D0AFE314E8831A0084988D /* second@2x.png */,
+				6895378114E96A6A0026F4CC /* AC34ThirdViewController.h */,
+				6895378214E96A6A0026F4CC /* AC34ThirdViewController.m */,
 				68D0AFC914E8831A0084988D /* Supporting Files */,
 			);
 			path = "AC 34 Viewer";
@@ -282,6 +302,10 @@
 				68D0AFD314E8831A0084988D /* AC34AppDelegate.m in Sources */,
 				68D0AFD914E8831A0084988D /* AC34FirstViewController.m in Sources */,
 				68D0AFE014E8831A0084988D /* AC34SecondViewController.m in Sources */,
+				6895378414E96A6A0026F4CC /* AC34ThirdViewController.m in Sources */,
+				6895378D14E9AE470026F4CC /* AC34Boat.m in Sources */,
+				68BFCF2614E9CF0500ADD815 /* AC34StreamHandler.m in Sources */,
+				68BFCF2914EA063B00ADD815 /* AC34BoatDataController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +477,7 @@
 				68D0AFFE14E8831A0084988D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		68D0AFFF14E8831A0084988D /* Build configuration list for PBXNativeTarget "AC 34 ViewerTests" */ = {
 			isa = XCConfigurationList;
@@ -461,6 +486,7 @@
 				68D0B00114E8831A0084988D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

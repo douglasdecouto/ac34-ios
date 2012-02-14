@@ -9,12 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@class AC34StreamHandler;
+
 @interface AC34AppDelegate : UIResponder <UIApplicationDelegate, NSStreamDelegate> {
     
-	CFReadStreamRef  readStream;
-	CFWriteStreamRef writeStream;
 }
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) AC34StreamHandler *streamHandler;
 
 @end
