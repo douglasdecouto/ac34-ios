@@ -13,6 +13,7 @@
 - (id) init {
     self = [super init];
     if (self) {
+        inputStream = 0;
         bodyBuf = 0;
         numHdrBytesSoFar = 0;
         numBodyBytesSoFar = 0;
@@ -44,7 +45,7 @@
     CFStreamCreatePairWithSocketToHost(
                         NULL, CFSTR("localhost"), 4941,
                         &self->readStream, &self->writeStream);
-    NSInputStream *inputStream = (__bridge NSInputStream *) self->readStream;
+    inputStream = (__bridge NSInputStream *) self->readStream;
     [inputStream setDelegate:self];
     [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [inputStream open];
@@ -55,6 +56,10 @@
     unsigned int nToRead;
     unsigned int nActuallyRead;
     
+    if (theStream != inputStream) {
+        NSLog(@"Got read for stream that is not our input stream");
+        return;
+    }
     
     while ([theStream hasBytesAvailable]) {
         [self check];
@@ -122,6 +127,8 @@
     
     NSLog(@"streamEvent %d", streamEvent);
     
+    // Should really use if-statement and bitmasks here, as per:
+    // http://stackoverflow.com/questions/7639427/how-to-open-multiple-socket-streams-on-the-same-runloop-in-ios-possible
 	switch (streamEvent) {
         case NSStreamEventHasBytesAvailable:
             /* Do read */

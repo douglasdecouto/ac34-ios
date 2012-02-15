@@ -14,6 +14,7 @@
 
 @interface AC34StreamHandler : NSObject <NSStreamDelegate> {
 
+    NSInputStream *inputStream;
     CFReadStreamRef  readStream;
     CFWriteStreamRef writeStream;
 

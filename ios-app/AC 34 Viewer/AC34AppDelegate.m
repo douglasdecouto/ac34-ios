@@ -63,7 +63,9 @@
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
     self.streamHandler = [[AC34StreamHandler alloc] init];
+    
     [self.streamHandler connectToServer:@"localhost" port:4941];
+    //  [self.streamHandler connectToServer:@"157.125.69.155" port:4940];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
