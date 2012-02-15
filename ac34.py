@@ -1,3 +1,4 @@
+import argparse
 import binascii  # compute_crc() calls the crc32 function
 from datetime import datetime
 import socket
@@ -11,6 +12,8 @@ TEST_PORT = 4941
 # Header sync byte magic numbers
 SYNC1 = 0x47
 SYNC2 = 0x83
+
+HDR_LEN = 15
 
 def bytes_to_num(buf):
     """ 
@@ -45,7 +48,7 @@ def compute_crc(buf, crc_so_far=0):
 
     :param crc_so_far: value of CRC of bytes seen so far.  To compute
     the CRC over multiple buffers, pass the previous buffer's CRC as
-    *crc_so_far*.  Use 0 (defult) for the first time.
+    *crc_so_far*.  Use 0 (default) for the first time.
 
     :returns: CRC value.
     """
@@ -176,6 +179,37 @@ MESSAGE_TYPES = {
 }
 
 
+def parse_header(hdr):
+    """
+    :param hdr: buffer with at least HDR_LEN bytes.
+    :returns: tuple of (message type code, timestamp as datetime, 
+        source ID code, following message body length)
+
+    Message body length does not include 4 trailing bytes for CRC.
+    """
+    
+    if len(hdr) < HDR_LEN:
+        raise Exception("Header buffer too short, expected %d but got %d" % (HDR_LEN, len(hdr)))
+
+    # Check sync bytes.  We should never be out of sync as we are
+    # reading this data over TCP in the normal case, or dump files.
+    # If we wanted to be really paranoid, we would scan the input
+    # stream until we found the sync bytes indicating the start of the
+    # message.
+    if ord(hdr[0]) != SYNC1 or ord(hdr[1]) != SYNC2:
+        raise Exception("Bad sync bytes 0x%x 0x%x" % (ord(hdr[0]), ord(hdr[1])))
+    
+    msg_type = ord(hdr[2])
+    timestamp = bytes_to_timestamp(hdr[3:9])
+    source_id = bytes_to_num(hdr[9:13])
+    msg_len = bytes_to_num(hdr[13:15]) # Length of following message body
+
+    return msg_type, timestamp, source_id, msg_len
+
+def get_msg_type_info(msg_type):
+    short_type_str, long_type_str, msg_func = \
+        MESSAGE_TYPES.get(msg_type, ("UNKNOWN", "Unknown Message Type", msg_nop))
+    return short_type_str, long_type_str, msg_func
 
 
 def main():
@@ -186,28 +220,18 @@ def main():
     while s:
         # Read and parse the header.  Multi-byte values are in
         # little-endian byte-order.
-        hdr = s.recv(15)
+        hdr = s.recv(HDR_LEN)
 
-        # Check sync bytes.  We should never be out of sync as we are
-        # reading this data over TCP.  If we wanted to be really
-        # paranoid, we would scan the input stream until we found the
-        # sync bytes indicating the start of the message.
-        if ord(hdr[0]) != SYNC1 or ord(hdr[1]) != SYNC2:
-            raise Exception("Bad sync bytes 0x%x 0x%x" % (ord(hdr[0]), ord(hdr[1])))
 
-        msg_type = ord(hdr[2])
-        timestamp = bytes_to_timestamp(hdr[3:9])
-        source_id = bytes_to_num(hdr[9:13])
-        msg_len = bytes_to_num(hdr[13:15]) # Length of following message body
+        msg_type, timestamp, source_id, msg_len = parse_header(hdr)
+        short_type_str, long_type_str, msg_func = get_msg_type_info(msg_type)
 
-        short_type_str, long_type_str, msg_func = \
-            MESSAGE_TYPES.get(msg_type, ("UNKNOWN", "Unknown Message Type", msg_nop))
         # print "TYPE", long_type_str
         # print "TS", timestamp
         # print "SRC", source_id
         # print "LEN", msg_len
 
-        # print "%s,%s" % (timestamp, long_type_str)
+        print "%s,%s" % (timestamp, long_type_str)
 
         body = s.recv(msg_len)
         actual_crc = compute_crc(hdr)
