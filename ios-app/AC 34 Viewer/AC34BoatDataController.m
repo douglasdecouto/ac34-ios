@@ -11,12 +11,13 @@
 
 // private initial constructor
 @interface AC34BoatDataController ()
-- (void)initializeDefaultDataList;
+- (void) initializeDefaultDataList;
 @end
 
 @implementation AC34BoatDataController
 
 @synthesize boatList = _boatList;
+@synthesize boatDict = _boatDict;
 
 // Constructor
 - (id) init {
@@ -29,24 +30,33 @@
 
 - (void) initializeDefaultDataList {
     NSMutableArray *boatList = [[NSMutableArray alloc] init];
+    NSMutableDictionary *boatDict = [[NSMutableDictionary alloc] init];
     self.boatList = boatList;
+    self.boatDict = boatDict;
+    
     [self addBoatWithName:@"First Boat"];
 }
     
-// Need to provide custom property 'setter' to ensure
+// Need to provide custom property 'setters' to ensure
 // list stays mutable.      
-- (void) setBoatList:(NSMutableArray *)newList {
+- (void) setBoatList:(NSMutableArray *) newList {
     if (_boatList != newList) {
         _boatList = [newList mutableCopy];
     }
 }
      
+- (void) setBoatDict:(NSMutableDictionary *) newDict {
+    if (_boatDict != newDict) {
+        _boatDict = [newDict mutableCopy];
+    }
+}
+
 - (unsigned) countOfList {
     return [self.boatList count];
 }
      
      
-- (AC34Boat *) objectInListAtIndex:(unsigned)theIndex {
+- (AC34Boat *) objectInListAtIndex:(unsigned) theIndex {
     if (theIndex >= [self countOfList]) {
         NSLog([NSString stringWithFormat:@"Bad index %d", theIndex]);
         return NULL;
@@ -56,9 +66,16 @@
 
 
 - (void) addBoatWithName:(NSString *) boatName {
-    AC34Boat *b = [[AC34Boat alloc] initWithName:boatName];
-    [self.boatList addObject:b];
-    NSLog([NSString stringWithFormat:@"Added boat %@", [b name]]);
+    AC34Boat *b = [self.boatDict valueForKey:boatName];
+    if (b == nil) {
+        b = [[AC34Boat alloc] initWithName:boatName];
+        [self.boatList addObject:b];
+        [self.boatDict setValue:b forKey:boatName];
+        NSLog(@"Added boat %@", [b name]);
+    }
+    else {
+        NSLog(@"Boat %@ already exists", [b name]);
+    }
 }
 
 

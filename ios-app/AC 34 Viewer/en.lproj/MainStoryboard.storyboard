@@ -101,19 +101,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Nx0-Mu-vUx">
-                                <rect key="frame" x="0.0" y="44" width="823" height="911"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="44" width="768" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.92450665813061073" green="1" blue="0.51160393963327211" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BoatCell" textLabel="3n9-ZH-UR4" style="IBUITableViewCellStyleDefault" id="HTj-8J-DJ8">
-                                        <rect key="frame" x="0.0" y="22" width="823" height="44"/>
+                                        <rect key="frame" x="0.0" y="22" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="823" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3n9-ZH-UR4">
-                                                    <rect key="frame" x="10" y="0.0" width="803" height="43"/>
+                                                    <rect key="frame" x="10" y="0.0" width="748" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -137,12 +137,26 @@
                                     <navigationItem id="24"/>
                                 </items>
                             </navigationBar>
+                            <textView clipsSubviews="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" editable="NO" text="tes text!" id="ypH-Q4-Edc" userLabel="Chatter Text View Label">
+                                <rect key="frame" x="0.0" y="564" width="768" height="391"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.56772490370341733" green="0.98820914169563911" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="3" id="C7L-Zr-RjF"/>
+                                </connections>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Second" image="second" id="6"/>
                     <connections>
-                        <outlet property="view" destination="Nx0-Mu-vUx" id="ziq-6C-9mp"/>
+                        <outlet property="chatterTextView" destination="ypH-Q4-Edc" id="m1C-Xv-Dc2"/>
+                        <outlet property="rootView" destination="16" id="Zae-5z-biP"/>
                     </connections>
                 </viewController>
             </objects>
@@ -159,8 +173,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="2" kind="relationship" relationship="viewControllers" id="27"/>
                         <segue destination="3" kind="relationship" relationship="viewControllers" id="28"/>
+                        <segue destination="2" kind="relationship" relationship="viewControllers" id="27"/>
                         <segue destination="iR7-JP-VL4" kind="relationship" relationship="viewControllers" id="HJq-qL-gAk"/>
                     </connections>
                 </tabBarController>
@@ -176,8 +190,13 @@
         <class className="AC34FirstViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AC34FirstViewController.h"/>
         </class>
-        <class className="AC34SecondViewController" superclassName="UITableViewController">
+        <class className="AC34SecondViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AC34SecondViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="chatterTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="rootView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
         </class>
         <class className="AC34ThirdViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AC34ThirdViewController.h"/>

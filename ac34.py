@@ -32,7 +32,7 @@ def bytes_to_num(buf):
 def bytes_to_timestamp(buf):
     """
     :param buf: Buffer with 6-byte timestamp in little-endian format,
-     which is 6 bytes indicating milliseconds since 1 Jan 1970
+     which is 6 bytes indicating milliseconds since 1 Jan 1970 UTC
      (conveniently same as UNIX/Python 'epoch').  Buf must have at
      least 6 bytes of data.
 
@@ -40,7 +40,7 @@ def bytes_to_timestamp(buf):
     """
     assert len(buf) >= 6
     timestamp_ms = bytes_to_num(buf[:6])
-    return datetime.fromtimestamp(timestamp_ms/1000.0)
+    return datetime.utcfromtimestamp(timestamp_ms/1000.0)
 
 def compute_crc(buf, crc_so_far=0):
     """
@@ -62,28 +62,27 @@ def compute_crc(buf, crc_so_far=0):
 class MessageException(Exception):
     pass
 
-# To be used for shared/global data and state.
-DATA = { }
 
-
-def msg_nop(body):
+def msg_nop(src_id, body):
     return
 
-def msg_heartbeat(body):
+HEARTBEATS = { } # src_id -> last heartbeat ID
+
+def msg_heartbeat(src_id, body):
     if len(body) != 4:
         raise MessageException("Heartbeat message too short")
     heartbeat = bytes_to_num(body)
-    print "Heartbeat", heartbeat
-    if 'last_heartbeat' not in DATA:
-        DATA['last_heartbeat'] = heartbeat
+    print "Heartbeat %d: %d" % (src_id, heartbeat)
+    if src_id not in HEARTBEATS:
+        HEARTBEATS[src_id] = heartbeat
     else:
-        last_hb = DATA['last_heartbeat']
+        last_hb = HEARTBEATS[src_id]
         delta_hb = heartbeat - last_hb
         if delta_hb != 1:
-            raise MessageException("Skipped %d heartbeats (this %d, last %d)" % \
-                                       (delta_hb - 1, heartbeat, last_hb))
+            raise MessageException("Skipped %d heartbeats for %d (this %d, last %d)" % \
+                                       (delta_hb - 1, src_id, heartbeat, last_hb))
 
-def msg_race_status(body):
+def msg_race_status(src_id, body):
     pass
 
 CHATTER_TYPES = {
@@ -94,7 +93,7 @@ CHATTER_TYPES = {
     5: "Machine-Generated Message",
 }
 
-def msg_chatter(body):
+def msg_chatter(src_id, body):
     if len(body) < 3:
         raise MessageException("Incomplete header in chatter message")
     msg_version = ord(body[0])
@@ -114,7 +113,7 @@ def msg_chatter(body):
     print "Chatter [%s]: '%s'" % (msg_type_str, body[4:])
 
 
-def msg_display_text(body):
+def msg_display_text(src_id, body):
     if len(body) < 4:
         raise MessageException("Incomplete header in display text message")
     msg_version = ord(body[0])
@@ -143,7 +142,7 @@ XML_TYPES = {
     7: ('Boat', 'root'),
 }
 
-def msg_xml(body):
+def msg_xml(src_id, body):
     if len(body) < 14:
         raise MessageException("Incomplete header in XML message")
     msg_version = ord(body[0])
@@ -214,6 +213,8 @@ def get_msg_type_info(msg_type):
 
 def main():
 
+    sources_seen = set()
+
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((HOST, TEST_PORT))
 
@@ -226,12 +227,15 @@ def main():
         msg_type, timestamp, source_id, msg_len = parse_header(hdr)
         short_type_str, long_type_str, msg_func = get_msg_type_info(msg_type)
 
+        sources_seen.add(source_id)
+
         # print "TYPE", long_type_str
         # print "TS", timestamp
         # print "SRC", source_id
         # print "LEN", msg_len
 
-        print "%s,%s" % (timestamp, long_type_str)
+        print "%s,%d,%s" % (timestamp, source_id, long_type_str)
+        print "   ", sorted(sources_seen)
 
         body = s.recv(msg_len)
         actual_crc = compute_crc(hdr)
@@ -244,7 +248,7 @@ def main():
             raise Exception("Bad CRC value")
 
         try:
-            msg_func(body)
+            msg_func(source_id, body)
         except MessageException, ex:
             print "ERROR handling message:", str(ex)
 

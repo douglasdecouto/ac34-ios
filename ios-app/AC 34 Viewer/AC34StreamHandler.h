@@ -8,31 +8,48 @@
 
 #import <Foundation/Foundation.h>
 
-#define AC34_HDR_SIZE 15
-#define AC34_SYNC1 0x47
-#define AC34_SYNC2 0x83
+#import "AC34StreamDelegate.h"
 
-@interface AC34StreamHandler : NSObject <NSStreamDelegate> {
+@interface AC34StreamHandler : NSObject <NSStreamDelegate>
 
-    NSInputStream *inputStream;
-    CFReadStreamRef  readStream;
-    CFWriteStreamRef writeStream;
+@property (nonatomic, weak) id <AC34StreamDelegate> delegate;
+@property bool verbose;
 
-    unsigned char hdrBuf[AC34_HDR_SIZE];
-    unsigned char *bodyBuf;
-    
-    // These track the number of bytes we have read so far for
-    // the header and body, respectively.
-    unsigned int numHdrBytesSoFar;
-    unsigned int numBodyBytesSoFar;
-    unsigned int numBodyBytesExpected; // size of bodyBuf
-    
-    bool inHdr;
-}
+- (id) init;
+- (void) check; // rep invariant
 
 - (void) connectToServer:(NSString *) host port:(UInt32)port;
-- (void) check; // rep invariant
 - (void) readBytes:(NSStream *) theStream;
 
+// This is the top-level message body handler.  It dispatches 
+// to more specifice message handling functions.  
+// bodyLen includes 4 bytes for checksum.
+- (void) handleMessage:(unsigned char *) hdr withBody:(unsigned char *)body bodyLen:(unsigned int) n;
+
+// Following functions handle specific message types.
+// bodyLen does NOT include 4 bytes for checksum.
+- (void) handleHeartBeatMessageFrom:(UInt32) sourceId at:(NSDate *) timeStamp withBody:(unsigned char *) body bodyLen:(unsigned int) n;
+
+- (void) handleChatterMessageFrom:(UInt32) sourceId at:(NSDate *) timeStamp withBody:(unsigned char *) body bodyLen:(unsigned int) n;
+
+- (void) handleLocationMessageFrom:(UInt32) sourceId at:(NSDate *) timeStamp withBody:(unsigned char *) body bodyLen:(unsigned int) n;
+
+- (void) handleXmlMessageFrom:(UInt32) sourceId at:(NSDate *) timeStamp withBody:(unsigned char *) body bodyLen:(unsigned int) n;
+
+
+// Following functions are class utility methods.
++ (NSString *) messageTypeforCode: (UInt32) code;
+
+// Returns UTC Date from 6-bye AC34 timestamp.
+// buf must have at least 6 bytes
++ (NSDate *) timeStampFromBuf: (unsigned char *) buf; 
+
+// Returns 4-byte unsigned integer stored in little-endian prder 
+// in the first 4 bytes of buf.
++ (UInt32) uInt32FromBuf: (unsigned char *) buf;
+
+// Returns 2-byte unsigned integer stored in little-endian prder 
+// in the first 2 bytes of buf.
++ (UInt16) uInt16FromBuf: (unsigned char *) buf;
 
 @end

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6895378414E96A6A0026F4CC /* AC34ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6895378214E96A6A0026F4CC /* AC34ThirdViewController.m */; };
 		6895378D14E9AE470026F4CC /* AC34Boat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6895378C14E9AE470026F4CC /* AC34Boat.m */; };
+		68A6CD1E14F2675500CAE7BC /* AC34.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A6CD1D14F2675500CAE7BC /* AC34.m */; };
+		68A6CD2114F2683A00CAE7BC /* AC34BoatLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A6CD2014F2683A00CAE7BC /* AC34BoatLocation.m */; };
 		68BFCF2614E9CF0500ADD815 /* AC34StreamHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BFCF2514E9CF0500ADD815 /* AC34StreamHandler.m */; };
 		68BFCF2914EA063B00ADD815 /* AC34BoatDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BFCF2814EA063B00ADD815 /* AC34BoatDataController.m */; };
 		68D0AFC314E8831A0084988D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D0AFC214E8831A0084988D /* UIKit.framework */; };
@@ -46,6 +48,11 @@
 		6895378214E96A6A0026F4CC /* AC34ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AC34ThirdViewController.m; sourceTree = "<group>"; };
 		6895378B14E9AE470026F4CC /* AC34Boat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AC34Boat.h; sourceTree = "<group>"; };
 		6895378C14E9AE470026F4CC /* AC34Boat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AC34Boat.m; sourceTree = "<group>"; };
+		68A6CD1814F2607F00CAE7BC /* AC34StreamDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AC34StreamDelegate.h; sourceTree = "<group>"; };
+		68A6CD1C14F2675500CAE7BC /* AC34.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AC34.h; sourceTree = "<group>"; };
+		68A6CD1D14F2675500CAE7BC /* AC34.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AC34.m; sourceTree = "<group>"; };
+		68A6CD1F14F2683A00CAE7BC /* AC34BoatLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AC34BoatLocation.h; sourceTree = "<group>"; };
+		68A6CD2014F2683A00CAE7BC /* AC34BoatLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AC34BoatLocation.m; sourceTree = "<group>"; };
 		68BFCF2414E9CF0500ADD815 /* AC34StreamHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AC34StreamHandler.h; sourceTree = "<group>"; };
 		68BFCF2514E9CF0500ADD815 /* AC34StreamHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AC34StreamHandler.m; sourceTree = "<group>"; };
 		68BFCF2714EA063B00ADD815 /* AC34BoatDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AC34BoatDataController.h; sourceTree = "<group>"; };
@@ -134,15 +141,20 @@
 		68D0AFC814E8831A0084988D /* AC 34 Viewer */ = {
 			isa = PBXGroup;
 			children = (
-				68BFCF2714EA063B00ADD815 /* AC34BoatDataController.h */,
-				68BFCF2814EA063B00ADD815 /* AC34BoatDataController.m */,
+				68A6CD1C14F2675500CAE7BC /* AC34.h */,
+				68A6CD1D14F2675500CAE7BC /* AC34.m */,
 				68D0AFD114E8831A0084988D /* AC34AppDelegate.h */,
 				68D0AFD214E8831A0084988D /* AC34AppDelegate.m */,
-				68BFCF2414E9CF0500ADD815 /* AC34StreamHandler.h */,
-				68BFCF2514E9CF0500ADD815 /* AC34StreamHandler.m */,
-				68D0AFD414E8831A0084988D /* MainStoryboard.storyboard */,
 				6895378B14E9AE470026F4CC /* AC34Boat.h */,
 				6895378C14E9AE470026F4CC /* AC34Boat.m */,
+				68A6CD1F14F2683A00CAE7BC /* AC34BoatLocation.h */,
+				68A6CD2014F2683A00CAE7BC /* AC34BoatLocation.m */,
+				68BFCF2714EA063B00ADD815 /* AC34BoatDataController.h */,
+				68BFCF2814EA063B00ADD815 /* AC34BoatDataController.m */,
+				68BFCF2414E9CF0500ADD815 /* AC34StreamHandler.h */,
+				68BFCF2514E9CF0500ADD815 /* AC34StreamHandler.m */,
+				68A6CD1814F2607F00CAE7BC /* AC34StreamDelegate.h */,
+				68D0AFD414E8831A0084988D /* MainStoryboard.storyboard */,
 				68D0AFD714E8831A0084988D /* AC34FirstViewController.h */,
 				68D0AFD814E8831A0084988D /* AC34FirstViewController.m */,
 				68D0AFDA14E8831A0084988D /* first.png */,
@@ -306,6 +318,8 @@
 				6895378D14E9AE470026F4CC /* AC34Boat.m in Sources */,
 				68BFCF2614E9CF0500ADD815 /* AC34StreamHandler.m in Sources */,
 				68BFCF2914EA063B00ADD815 /* AC34BoatDataController.m in Sources */,
+				68A6CD1E14F2675500CAE7BC /* AC34.m in Sources */,
+				68A6CD2114F2683A00CAE7BC /* AC34BoatLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

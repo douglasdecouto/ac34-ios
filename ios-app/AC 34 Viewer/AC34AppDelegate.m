@@ -21,10 +21,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {  
     // Setup the "Second view controller" for tab 2 with a boat list data controller.
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    UINavigationController *navigationController = (UINavigationController *) self.window.rootViewController;
     
-    // Note: we know the "SecondViewController" ias at index 1.
-    AC34SecondViewController *secondViewController = (AC34SecondViewController *)[[navigationController viewControllers] objectAtIndex:1];
+    // Note: we know the "SecondViewController" is at index 0 -- we re-ordered the tabs to make 'second' be first.
+    AC34SecondViewController *secondViewController = (AC34SecondViewController *)[[navigationController viewControllers] objectAtIndex:0];
     
     NSString *className = NSStringFromClass([secondViewController class]); 
     NSLog(@"Second controller class name %@", className);
@@ -62,7 +62,14 @@
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    // Setup the "Second view controller" for tab 2 with a boat list data controller.
+    UINavigationController *navigationController = (UINavigationController *) self.window.rootViewController;
+    
+    // Note: we know the "SecondViewController" is at index 1.
+    AC34SecondViewController *secondViewController = (AC34SecondViewController *)[[navigationController viewControllers] objectAtIndex:0];
+
     self.streamHandler = [[AC34StreamHandler alloc] init];
+    self.streamHandler.delegate = secondViewController;
     
     [self.streamHandler connectToServer:@"localhost" port:4941];
     //  [self.streamHandler connectToServer:@"157.125.69.155" port:4940];

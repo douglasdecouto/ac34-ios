@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+#import "AC34StreamDelegate.h"
+
 @class AC34BoatDataController;
 
-@interface AC34SecondViewController : UITableViewController 
+@interface AC34SecondViewController : UIViewController <UITableViewDelegate, UITextViewDelegate, AC34StreamDelegate>
 
 @property (nonatomic, retain) AC34BoatDataController *dataController;
+@property (weak, nonatomic) IBOutlet UITextView *chatterTextView;
+@property (weak, nonatomic) IBOutlet UIView *rootView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
