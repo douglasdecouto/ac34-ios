@@ -12,6 +12,8 @@
 #import "AC34Boat.h"
 #import "AC34BoatDataController.h"
 
+#import "SMXMLDocument.h"
+
 @implementation AC34SecondViewController
 
 @synthesize dataController = _dataController;
@@ -123,8 +125,8 @@
     
     old = self.chatterTextView.text;
     new = [NSString stringWithFormat:@"%lu %@ [%@] %@\n", sourceId, timeStampStr, chatterTypeStr, chatter];
-    
-    self.chatterTextView.text = [old stringByAppendingString:new];
+    //XXX
+    //self.chatterTextView.text = [old stringByAppendingString:new];
 }
 
 - (void) locationUpdateFrom:(UInt32) sourceId at:(NSDate *) timeStamp 
@@ -139,19 +141,55 @@
      withXmlType:(UInt32) xmlType withXmlTimeStamp:(NSDate *) xmlTimeStamp
          withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withData:(NSData *) xml {
     
+    NSError *error;
+    SMXMLDocument *doc;
+    
+    self.chatterTextView.text = [[NSString alloc] initWithData:xml encoding:NSUTF8StringEncoding];
+    
+    doc = [SMXMLDocument documentWithData:xml error:&error];
+    if (error) {
+        NSLog(@"Error parsing XML message type %lu from %lu: %@", xmlType, sourceId, error);
+        return;
+    }
+    
     switch (xmlType) {
         case kRegattaXml:
-            [self handleRegattaXmlFrom:sourceId at:timeStamp withXmlTimeStamp:xmlTimeStamp withSeq:sequenceNum withAck:ack withData:xml];
+            [self handleRegattaXmlFrom:sourceId at:timeStamp withXmlTimeStamp:xmlTimeStamp withSeq:sequenceNum withAck:ack withDoc:doc];
         case kRaceXml:
-            [self handleRaceXmlFrom:sourceId at:timeStamp withXmlTimeStamp:xmlTimeStamp withSeq:sequenceNum withAck:ack withData:xml];
+            [self handleRaceXmlFrom:sourceId at:timeStamp withXmlTimeStamp:xmlTimeStamp withSeq:sequenceNum withAck:ack withDoc:doc];
             break;
         case kBoatXml:
-            [self handleBoatXmlFrom:sourceId at:timeStamp withXmlTimeStamp:xmlTimeStamp withSeq:sequenceNum withAck:ack withData:xml];
+            [self handleBoatXmlFrom:sourceId at:timeStamp withXmlTimeStamp:xmlTimeStamp withSeq:sequenceNum withAck:ack withDoc:doc];
             break;
         default:
             NSLog(@"Unknown XML message type %lu from %lu", xmlType, sourceId);
             return;
     }
 }
+
+- (void) handleBoatXmlFrom:(UInt32) sourceId at:(NSDate *) timeStamp 
+        withXmlTimeStamp:(NSDate *) xmlTimeStamp
+        withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withDoc:(SMXMLDocument *)doc {
+    
+    SMXMLElement *boats = [doc.root childNamed:@"Boats"];
+    for (SMXMLElement *boat in [boats childrenNamed:@"Boat"]) {
+        NSString *boatType = [boat attributeNamed:@"Type"];
+        NSString *boatIdStr = [boat attributeNamed:@"SourceID"]; 
+        NSLog(@"BBBBB type %@ id %@", boatType, boatIdStr);
+    }
+}
+
+- (void) handleRaceXmlFrom:(UInt32) sourceId at:(NSDate *) timeStamp 
+        withXmlTimeStamp:(NSDate *) xmlTimeStamp
+        withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withDoc:(SMXMLDocument *)doc {
+    
+}
+
+- (void) handleRegattaXmlFrom:(UInt32) sourceId at:(NSDate *) timeStamp 
+        withXmlTimeStamp:(NSDate *) xmlTimeStamp
+        withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withDoc:(SMXMLDocument *)doc {
+    
+}
+
 
 @end

@@ -234,6 +234,7 @@ struct {
             break;
         case kXmlMsg:
             [self handleXmlMessageFrom:sourceId at:timeStamp withBody:body bodyLen:realBodyLen];
+            break;
         default:
             NSLog(@"Unhandled message type '%@'", messageTypeStr);
     } 
@@ -327,10 +328,15 @@ struct {
         NSLog(@"Bad XML body from %lu, expected %lu but got %u bytes", sourceId, xmlLen + kXmlPrefixLen, n);        
     }
 
-    // XXX We are copying the buffer here; will the XML library copy it in turn
+    // XXX We are copying the buffer here; will the XML library copy it in turn?
     
-    // From docs and test data, XML messages _are_ null-terminated.  
-    xmlData = [NSData dataWithBytes:body+kXmlPrefixLen length:xmlLen-1];
+    // From docs, XML messages are null-terminated, but from
+    // test data experience is mixed.  So strip any trailing
+    // nulls in the data.
+    while (xmlLen > 0 && body[kXmlPrefixLen + xmlLen - 1] == 0) {
+        xmlLen--;
+    }
+    xmlData = [NSData dataWithBytes:body+kXmlPrefixLen length:xmlLen];
     
     if (delegateRespondsTo.xmlFrom) {
         [self.delegate xmlFrom:sourceId at:timeStamp 
@@ -343,14 +349,14 @@ struct {
 - (void) stream:(NSStream *)theStream handleEvent:(NSStreamEvent) streamEvent {
 	/* Handle a stream event */
     
-    NSLog(@"streamEvent %d", streamEvent);
+    // NSLog(@"streamEvent %d", streamEvent);
     
     // Should really use if-statement and bitmasks here, as per:
     // http://stackoverflow.com/questions/7639427/how-to-open-multiple-socket-streams-on-the-same-runloop-in-ios-possible
 	switch (streamEvent) {
         case NSStreamEventHasBytesAvailable:
             /* Do read */
-            NSLog(@"NSStreamEventHasBytesAvailable");
+            // NSLog(@"NSStreamEventHasBytesAvailable");
             [self readBytes:theStream];
             break;
             

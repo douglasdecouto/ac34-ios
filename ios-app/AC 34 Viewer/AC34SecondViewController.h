@@ -11,6 +11,7 @@
 #import "AC34StreamDelegate.h"
 
 @class AC34BoatDataController;
+@class SMXMLDocument;
 
 @interface AC34SecondViewController : UIViewController <UITableViewDelegate, UITextViewDelegate, AC34StreamDelegate>
 
@@ -20,17 +21,17 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 
-// Internl functions
+// Internal functions
 
 - (void) handleBoatXmlFrom:(UInt32) sourceId at:(NSDate *) timeStamp 
     withXmlTimeStamp:(NSDate *) xmlTimeStamp
-    withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withData:(NSData *) xml;
+    withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withDoc:(SMXMLDocument *)doc;;
 
 - (void) handleRaceXmlFrom:(UInt32) sourceId at:(NSDate *) timeStamp 
     withXmlTimeStamp:(NSDate *) xmlTimeStamp
-    withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withData:(NSData *) xml;
+    withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withDoc:(SMXMLDocument *)doc;;
 
 - (void) handleRegattaXmlFrom:(UInt32) sourceId at:(NSDate *) timeStamp 
     withXmlTimeStamp:(NSDate *) xmlTimeStamp
-    withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withData:(NSData *) xml;
+    withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withDoc:(SMXMLDocument *)doc;
 @end
