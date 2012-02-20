@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		682418E514F2ECD900E5D877 /* SMXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 682418E414F2ECD900E5D877 /* SMXMLDocument.m */; };
 		6895378414E96A6A0026F4CC /* AC34ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6895378214E96A6A0026F4CC /* AC34ThirdViewController.m */; };
 		6895378D14E9AE470026F4CC /* AC34Boat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6895378C14E9AE470026F4CC /* AC34Boat.m */; };
 		68A6CD1E14F2675500CAE7BC /* AC34.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A6CD1D14F2675500CAE7BC /* AC34.m */; };
@@ -44,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		682418E314F2ECD900E5D877 /* SMXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMXMLDocument.h; path = "../nfarina-xmldocument-5c9cc3a/SMXMLDocument.h"; sourceTree = "<group>"; };
+		682418E414F2ECD900E5D877 /* SMXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMXMLDocument.m; path = "../nfarina-xmldocument-5c9cc3a/SMXMLDocument.m"; sourceTree = "<group>"; };
 		6895378114E96A6A0026F4CC /* AC34ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AC34ThirdViewController.h; sourceTree = "<group>"; };
 		6895378214E96A6A0026F4CC /* AC34ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AC34ThirdViewController.m; sourceTree = "<group>"; };
 		6895378B14E9AE470026F4CC /* AC34Boat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AC34Boat.h; sourceTree = "<group>"; };
@@ -108,9 +111,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		682418E114F2ECAC00E5D877 /* SMXMLDocument */ = {
+			isa = PBXGroup;
+			children = (
+				682418E314F2ECD900E5D877 /* SMXMLDocument.h */,
+				682418E414F2ECD900E5D877 /* SMXMLDocument.m */,
+			);
+			name = SMXMLDocument;
+			sourceTree = "<group>";
+		};
 		68D0AFB314E8831A0084988D = {
 			isa = PBXGroup;
 			children = (
+				682418E114F2ECAC00E5D877 /* SMXMLDocument */,
 				68D0AFC814E8831A0084988D /* AC 34 Viewer */,
 				68D0AFF114E8831A0084988D /* AC 34 ViewerTests */,
 				68D0AFC114E8831A0084988D /* Frameworks */,
@@ -320,6 +333,7 @@
 				68BFCF2914EA063B00ADD815 /* AC34BoatDataController.m in Sources */,
 				68A6CD1E14F2675500CAE7BC /* AC34.m in Sources */,
 				68A6CD2114F2683A00CAE7BC /* AC34BoatLocation.m in Sources */,
+				682418E514F2ECD900E5D877 /* SMXMLDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

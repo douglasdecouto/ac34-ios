@@ -82,21 +82,6 @@
     return YES;
 }
 
-// Custom code
-- (void) addBoatWithName:(NSString *)boatName {
-    [self.dataController addBoatWithName:boatName];
-    // [self.tView reloadData];
-}
-
-- (void) addChatter:(NSString *) chatter withType:(NSString *) chatterType  {
-    NSString *new, *old;
-    
-    old = self.chatterTextView.text;
-    new = [NSString stringWithFormat:@"[%@] %@\n", chatterType, chatter];
-
-    self.chatterTextView.text = [old stringByAppendingString:new];
-}
-
 
 // Table view delegate code.
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -154,17 +139,14 @@
      withXmlType:(UInt32) xmlType withXmlTimeStamp:(NSDate *) xmlTimeStamp
          withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withData:(NSData *) xml {
     
-    NSString *rootName;
-    
     switch (xmlType) {
         case kRegattaXml:
-            rootName = @"RegattaConfig";
-            break;
+            [self handleRegattaXmlFrom:sourceId at:timeStamp withXmlTimeStamp:xmlTimeStamp withSeq:sequenceNum withAck:ack withData:xml];
         case kRaceXml:
-            rootName = @"Race";
+            [self handleRaceXmlFrom:sourceId at:timeStamp withXmlTimeStamp:xmlTimeStamp withSeq:sequenceNum withAck:ack withData:xml];
             break;
         case kBoatXml:
-            rootName = @"root";
+            [self handleBoatXmlFrom:sourceId at:timeStamp withXmlTimeStamp:xmlTimeStamp withSeq:sequenceNum withAck:ack withData:xml];
             break;
         default:
             NSLog(@"Unknown XML message type %lu from %lu", xmlType, sourceId);

@@ -19,4 +19,18 @@
 @property (weak, nonatomic) IBOutlet UIView *rootView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+
+// Internl functions
+
+- (void) handleBoatXmlFrom:(UInt32) sourceId at:(NSDate *) timeStamp 
+    withXmlTimeStamp:(NSDate *) xmlTimeStamp
+    withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withData:(NSData *) xml;
+
+- (void) handleRaceXmlFrom:(UInt32) sourceId at:(NSDate *) timeStamp 
+    withXmlTimeStamp:(NSDate *) xmlTimeStamp
+    withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withData:(NSData *) xml;
+
+- (void) handleRegattaXmlFrom:(UInt32) sourceId at:(NSDate *) timeStamp 
+    withXmlTimeStamp:(NSDate *) xmlTimeStamp
+    withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withData:(NSData *) xml;
 @end

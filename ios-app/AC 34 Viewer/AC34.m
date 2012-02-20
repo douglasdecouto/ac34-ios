@@ -18,11 +18,12 @@
 
 + (NSString *) chatterTypeforCode: (UInt32) code {
     switch (code) {
-        case kYachtChatter:     return @"Yacht";
-        case kUmpireChatter:    return @"Umpire";
+        case kYachtChatter:         return @"Yacht";
+        case kUmpireChatter:        return @"Umpire";
         case kRaceOfficerChatter:   return @"Race Officer";
         case kCommentaryChatter:    return @"Commentary";
-        case kMachineChatter:   return @"Machine";
+        case kMachineChatter:       return @"Machine";
+        case kInternalChatter:      return @"Internal";
         default:
             return [NSString stringWithFormat:@"Unknown (%lu)", code];
     }
