@@ -85,7 +85,9 @@
 }
 
 
-// Table view delegate code.
+/*
+ * Table view delegate code.
+ */
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger n = [self.dataController countOfList];
     NSLog(@"%d rows in table", n);
@@ -98,17 +100,39 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     NSLog(@"cellForRowAt %d", indexPath.row);
-    
     AC34Boat *boatAtIndex = [self.dataController objectInListAtIndex:indexPath.row];
-    [[cell textLabel] setText:boatAtIndex.name];
     
-    [[cell detailTextLabel] setText:@"Fake detail text"];    
+    [[cell textLabel] setText:[boatAtIndex displayName]];
+    [[cell detailTextLabel] setText:[boatAtIndex displaySubtitle]];
+    
+    // boatType is one of: Yacht, RC, Mark, Umpire, Marshall, Pin
+    NSString *boatType = boatAtIndex.boatType;
+    NSString *iconName = @"unknown-icon";
+    if ([boatType isEqualToString:@"Yacht"])
+        iconName = @"yacht-icon";
+    else if ([boatType isEqualToString:@"RC"])
+        iconName = @"umpire-icon";  // XXX
+    else if ([boatType isEqualToString:@"Mark"])
+        iconName = @"mark-icon";
+    else if ([boatType isEqualToString:@"Umpire"])
+        iconName = @"umpire-icon";
+    else if ([boatType isEqualToString:@"Marshall"])
+        iconName = @"umpire-icon";  // XXX
+    else if ([boatType isEqualToString:@"Pin"])
+        iconName = @"mark-icon";    // XXX
+    
+    // XXX Cache these paths?
+    NSString *path = [[NSBundle mainBundle] pathForResource:iconName ofType:@"png"];
+    UIImage *theImage = [UIImage imageWithContentsOfFile:path];
+    cell.imageView.image = theImage;
+    
     return cell;
 }
 
 
-
-// AC34StreamDelegate functions.
+/*
+ * AC34StreamDelegate functions.
+*/
 - (void) heartBeatFrom:(UInt32) sourceId at:(NSDate *) timeStamp 
         withSeq:(UInt32) sequenceNum {
     // Quick hack to get this data displayed on screen
@@ -167,16 +191,89 @@
     }
 }
 
+
+- (NSArray *) shapeFromXml:(SMXMLElement *) elem {
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    for (SMXMLElement *vtx in [elem childrenNamed:@"Vtx"]) {
+        // Hack: use point3d, put seq into z, and sort by z.
+        AC34Point3D *p = [[AC34Point3D alloc] init];
+        p.z = [[vtx attributeNamed:@"Seq"] intValue];
+        p.x = [[vtx attributeNamed:@"X"] floatValue];
+        p.y = [[vtx attributeNamed:@"Y"] floatValue];
+        [arr addObject:p];
+    }
+    
+    // Sort by seq, and extract the 2-D parts
+    NSSortDescriptor *sorter = [[NSSortDescriptor alloc] initWithKey:@"z" ascending:true];
+    NSArray *sorters = [[NSArray alloc] initWithObjects:sorter, nil];
+    [arr sortUsingDescriptors:sorters];
+    
+    NSMutableArray *newArr = [NSMutableArray arrayWithCapacity:[arr count]];
+    for (AC34Point3D *p in arr)
+        [newArr addObject:[p point2D]];
+    return newArr;
+}
+
 - (void) handleBoatXmlFrom:(UInt32) sourceId at:(NSDate *) timeStamp 
         withXmlTimeStamp:(NSDate *) xmlTimeStamp
         withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withDoc:(SMXMLDocument *)doc {
+   
+    // N.B. Treat shape IDs as strings, don't bother converting to integers.
     
+    // shape ID -> AC34Point2D of points
+    NSMutableDictionary *outlines = [[NSMutableDictionary alloc] init]; 
+    
+    // shape ID -> Dictionary of part name -> AC34Point2D of points
+    NSMutableDictionary *hullParts = [[NSMutableDictionary alloc] init];
+  
+    // 1. Get all the boat shapes
+    SMXMLElement *boatShapes = [doc.root childNamed:@"BoatShapes"];
+    for (SMXMLElement *boatShape in [boatShapes childrenNamed:@"BoatShape"]) {
+        NSString *shapeId = [boatShape attributeNamed:@"ShapeID"];
+        for (SMXMLElement *child in [boatShape children]) {
+            NSArray *shape = [self shapeFromXml:child];
+            NSString *shapeName = [child name];
+            if ([shapeName compare:@"Vertices"] == NSOrderedSame) {
+                [outlines setValue:shape forKey:shapeId];   
+            }
+            else {
+                NSMutableDictionary *parts = [hullParts valueForKey:shapeId];
+                if (parts == nil) {
+                    parts = [[NSMutableDictionary alloc] init];
+                    [hullParts setValue:parts forKey:shapeId];
+                }
+                [parts setValue:shape forKey:shapeName];
+            }
+        }
+    }
+    
+    // 2. Get the boats, and setup each boat with its shapes and other properties.
     SMXMLElement *boats = [doc.root childNamed:@"Boats"];
     for (SMXMLElement *boat in [boats childrenNamed:@"Boat"]) {
         NSString *boatType = [boat attributeNamed:@"Type"];
         NSString *boatIdStr = [boat attributeNamed:@"SourceID"]; 
-        NSLog(@"BBBBB type %@ id %@", boatType, boatIdStr);
+        UInt32 boatId = [boatIdStr integerValue]; 
+        NSString *shapeId = [boat attributeNamed:@"ShapeID"]; 
+        NSString *hullNum = [boat attributeNamed:@"HullNum"]; 
+        NSString *boatName = [boat attributeNamed:@"BoatName"]; 
+        NSString *skipper = [boat attributeNamed:@"Skipper"]; 
+        NSString *country = [boat attributeNamed:@"Country"]; 
+        NSLog(@"BOAT %@ skipper %@ country %@ type %@ id %lu hull %@ shape %@", boatName, skipper, country, boatType, boatId, hullNum, shapeId);
+
+        AC34Boat *b = [[AC34Boat alloc] initWithName:hullNum];
+        b.sourceId = boatId;
+        b.boatType = boatType;
+        b.boatName = boatName;
+        b.skipper = skipper;
+        b.country = country;
+        b.hullNum = hullNum;
+        b.hullOutline = [outlines objectForKey:shapeId];
+        b.hullShapes = [hullParts objectForKey:shapeId];
+
+        [self.dataController addBoat:b];
     }
+    NSLog(@"XXX Rows in dataController %u", [self.dataController countOfList]);
+    [self.tableView reloadData];
 }
 
 - (void) handleRaceXmlFrom:(UInt32) sourceId at:(NSDate *) timeStamp 

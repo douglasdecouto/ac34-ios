@@ -33,5 +33,18 @@ enum AC34XmlType {
 + (NSString *) chatterTypeforCode: (UInt32) code;
 + (NSString *) formatDateISO: (NSDate *) date;
 
+@end
 
+@interface AC34Point2D : NSObject
+@property float x;
+@property float y;
+- (AC34Point2D *) initWithX: (float) theX y:(float) theY;
+@end
+
+@interface AC34Point3D : NSObject
+@property float x;
+@property float y;
+@property float z;
+- (AC34Point3D *) initWithX: (float) theX y:(float) theY z:(float) theZ;
+- (AC34Point2D *) point2D;
 @end

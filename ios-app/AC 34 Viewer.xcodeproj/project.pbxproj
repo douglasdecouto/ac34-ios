@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68170486155469390053D656 /* yacht-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68170483155469390053D656 /* yacht-icon.png */; };
+		68170487155469390053D656 /* mark-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68170484155469390053D656 /* mark-icon.png */; };
+		68170488155469390053D656 /* umpire-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68170485155469390053D656 /* umpire-icon.png */; };
 		682418E814F2EFC600E5D877 /* SMXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 682418E714F2EFC600E5D877 /* SMXMLDocument.m */; };
 		6895378414E96A6A0026F4CC /* AC34ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6895378214E96A6A0026F4CC /* AC34ThirdViewController.m */; };
 		6895378D14E9AE470026F4CC /* AC34Boat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6895378C14E9AE470026F4CC /* AC34Boat.m */; };
@@ -45,6 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		68170483155469390053D656 /* yacht-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "yacht-icon.png"; path = "../icons/yacht-icon.png"; sourceTree = "<group>"; };
+		68170484155469390053D656 /* mark-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mark-icon.png"; path = "../icons/mark-icon.png"; sourceTree = "<group>"; };
+		68170485155469390053D656 /* umpire-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "umpire-icon.png"; path = "../icons/umpire-icon.png"; sourceTree = "<group>"; };
 		682418E614F2EFC600E5D877 /* SMXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMXMLDocument.h; path = "../nfarina-xmldocument-5852d4c/SMXMLDocument.h"; sourceTree = "<group>"; };
 		682418E714F2EFC600E5D877 /* SMXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMXMLDocument.m; path = "../nfarina-xmldocument-5852d4c/SMXMLDocument.m"; sourceTree = "<group>"; };
 		6895378114E96A6A0026F4CC /* AC34ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AC34ThirdViewController.h; sourceTree = "<group>"; };
@@ -111,6 +117,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		68170482155469230053D656 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				68170483155469390053D656 /* yacht-icon.png */,
+				68170484155469390053D656 /* mark-icon.png */,
+				68170485155469390053D656 /* umpire-icon.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
 		682418E114F2ECAC00E5D877 /* SMXMLDocument */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +139,7 @@
 		68D0AFB314E8831A0084988D = {
 			isa = PBXGroup;
 			children = (
+				68170482155469230053D656 /* Icons */,
 				682418E114F2ECAC00E5D877 /* SMXMLDocument */,
 				68D0AFC814E8831A0084988D /* AC 34 Viewer */,
 				68D0AFF114E8831A0084988D /* AC 34 ViewerTests */,
@@ -289,6 +306,9 @@
 				68D0AFDD14E8831A0084988D /* first@2x.png in Resources */,
 				68D0AFE214E8831A0084988D /* second.png in Resources */,
 				68D0AFE414E8831A0084988D /* second@2x.png in Resources */,
+				68170486155469390053D656 /* yacht-icon.png in Resources */,
+				68170487155469390053D656 /* mark-icon.png in Resources */,
+				68170488155469390053D656 /* umpire-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,10 +8,30 @@
 
 #import <Foundation/Foundation.h>
 
+#import "AC34.h"
+
 @interface AC34Boat : NSObject
 
-@property (nonatomic, copy) NSString *name;
+@property UInt32 sourceId;
+@property (nonatomic, copy) NSString *hullNum;
+@property (nonatomic, copy) NSString *boatName;
+@property (nonatomic, copy) NSString *skipper;
+@property (nonatomic, copy) NSString *country;
+@property (nonatomic, copy) NSString *boatType;
 
--(id)initWithName:(NSString *)name;
+// bounding hull shape, array of AC34Point2D.  Should always exist.
+@property (nonatomic, copy) NSArray *hullOutline; 
+
+// dict from shape name -> NSArray of AC34Point2D
+// May be empty, if so, use the bounding hull shape in hullOutline.
+@property (nonatomic, copy) NSDictionary *hullShapes;
+
+@property (nonatomic, copy) AC34Point3D *gpsPos;
+@property (nonatomic, copy) AC34Point3D *flagPos;
+
+- (id)initWithName:(NSString *)name;
+
+- (NSString *) displayName;
+- (NSString *) displaySubtitle;
 
 @end

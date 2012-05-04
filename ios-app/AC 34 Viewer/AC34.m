@@ -30,3 +30,36 @@
 }
 
 @end
+
+
+@implementation AC34Point2D
+@synthesize x = _x;
+@synthesize y = _y;
+- (AC34Point2D *) initWithX: (float) theX y:(float) theY {
+    self = [super init];
+    if (self) {
+        self.x = theX;
+        self.y = theY;
+    }
+    return self;
+}
+@end
+
+@implementation AC34Point3D
+@synthesize x = _x;
+@synthesize y = _y;
+@synthesize z = _z;
+- (AC34Point3D *) initWithX: (float) theX y:(float) theY  z:(float) theZ {
+    self = [super init];
+    if (self) {
+        _x = theX;
+        _y = theY;
+        _z = theZ;
+    }
+    return self;
+}
+- (AC34Point2D *) point2D {
+    return [[AC34Point2D alloc] initWithX: self.x y:self.y];
+}
+@end
+

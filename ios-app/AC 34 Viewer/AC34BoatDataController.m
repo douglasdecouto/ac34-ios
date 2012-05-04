@@ -33,8 +33,6 @@
     NSMutableDictionary *boatDict = [[NSMutableDictionary alloc] init];
     self.boatList = boatList;
     self.boatDict = boatDict;
-    
-    [self addBoatWithName:@"First Boat"];
 }
     
 // Need to provide custom property 'setters' to ensure
@@ -58,23 +56,22 @@
      
 - (AC34Boat *) objectInListAtIndex:(unsigned) theIndex {
     if (theIndex >= [self countOfList]) {
-        NSLog([NSString stringWithFormat:@"Bad index %d", theIndex]);
+        NSLog(@"Bad index %d", theIndex);
         return NULL;
     }
     return [self.boatList objectAtIndex:theIndex];
 }
 
 
-- (void) addBoatWithName:(NSString *) boatName {
-    AC34Boat *b = [self.boatDict valueForKey:boatName];
+- (void) addBoat:(AC34Boat *) theBoat {
+    AC34Boat *b = [self.boatDict valueForKey:theBoat.boatName];
     if (b == nil) {
-        b = [[AC34Boat alloc] initWithName:boatName];
-        [self.boatList addObject:b];
-        [self.boatDict setValue:b forKey:boatName];
-        NSLog(@"Added boat %@", [b name]);
+        [self.boatList addObject:theBoat];
+        [self.boatDict setValue:theBoat forKey:theBoat.boatName];
+        NSLog(@"Added boat %@", theBoat.boatName);
     }
-    else {
-        NSLog(@"Boat %@ already exists", [b name]);
+    else {  
+        NSLog(@"Boat %@ already exists", theBoat.boatName);
     }
 }
 

@@ -17,6 +17,6 @@
 
 - (unsigned) countOfList;
 - (AC34Boat *) objectInListAtIndex:(unsigned) theIndex;
-- (void) addBoatWithName:(NSString *) boatName;
+- (void) addBoat:(AC34Boat *) theBoat;
 
 @end

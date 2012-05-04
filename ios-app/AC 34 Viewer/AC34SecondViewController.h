@@ -21,17 +21,18 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 
-// Internal functions
+// Internal functions.
 
 - (void) handleBoatXmlFrom:(UInt32) sourceId at:(NSDate *) timeStamp 
     withXmlTimeStamp:(NSDate *) xmlTimeStamp
-    withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withDoc:(SMXMLDocument *)doc;;
+    withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withDoc:(SMXMLDocument *)doc;
 
 - (void) handleRaceXmlFrom:(UInt32) sourceId at:(NSDate *) timeStamp 
     withXmlTimeStamp:(NSDate *) xmlTimeStamp
-    withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withDoc:(SMXMLDocument *)doc;;
+    withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withDoc:(SMXMLDocument *)doc;
 
 - (void) handleRegattaXmlFrom:(UInt32) sourceId at:(NSDate *) timeStamp 
     withXmlTimeStamp:(NSDate *) xmlTimeStamp
     withSeq:(UInt32) sequenceNum withAck:(UInt32) ack withDoc:(SMXMLDocument *)doc;
+
 @end
