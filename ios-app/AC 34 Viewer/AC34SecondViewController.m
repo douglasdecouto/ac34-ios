@@ -10,6 +10,7 @@
 
 #import "AC34.h"
 #import "AC34Boat.h"
+#import "AC34BoatLocation.h"
 #import "AC34BoatDataController.h"
 
 #import "SMXMLDocument.h"
@@ -90,7 +91,6 @@
  */
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger n = [self.dataController countOfList];
-    NSLog(@"%d rows in table", n);
     return n;
 }
 
@@ -99,7 +99,6 @@
     static NSString *CellIdentifier = @"BoatCell"; // Must match template cell ID in inspector
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    NSLog(@"cellForRowAt %d", indexPath.row);
     AC34Boat *boatAtIndex = [self.dataController objectInListAtIndex:indexPath.row];
     
     [[cell textLabel] setText:[boatAtIndex displayName]];
@@ -159,6 +158,16 @@
     NSString *chatter = [NSString stringWithFormat:@"Location update"];
     [self chatterFrom:sourceId at:timeStamp withType:kInternalChatter withChatter:chatter];
     
+    AC34Boat *b = [self.dataController boatForSourceId:sourceId];
+    if (b == nil) {
+        NSLog(@"Position update from unknown source %lu at %@", sourceId, timeStamp);
+        return;
+    }
+    
+    b.lastLocUpdateAt = timeStamp;
+    b.lastLocation = loc;
+    
+    // XXX redraw display now!
 }
 
 - (void) xmlFrom:(UInt32) sourceId at:(NSDate *) timeStamp 
@@ -270,9 +279,13 @@
         b.hullOutline = [outlines objectForKey:shapeId];
         b.hullShapes = [hullParts objectForKey:shapeId];
 
+        // GPS position?
+        // Flag position?
+        
         [self.dataController addBoat:b];
     }
-    NSLog(@"XXX Rows in dataController %u", [self.dataController countOfList]);
+
+    // Tell the boat display tables to refresh.
     [self.tableView reloadData];
 }
 

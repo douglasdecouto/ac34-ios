@@ -62,12 +62,17 @@
     return [self.boatList objectAtIndex:theIndex];
 }
 
+- (AC34Boat *) boatForSourceId:(UInt32) sourceId {
+    NSNumber *key = [NSNumber numberWithUnsignedLong:sourceId];
+    return [self.boatDict objectForKey:key];
+}
+
 
 - (void) addBoat:(AC34Boat *) theBoat {
-    AC34Boat *b = [self.boatDict valueForKey:theBoat.boatName];
+    AC34Boat *b = [self.boatDict objectForKey:[theBoat key]];
     if (b == nil) {
         [self.boatList addObject:theBoat];
-        [self.boatDict setValue:theBoat forKey:theBoat.boatName];
+        [self.boatDict setObject:theBoat forKey:[theBoat key]];
         NSLog(@"Added boat %@", theBoat.boatName);
     }
     else {  

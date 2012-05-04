@@ -10,4 +10,6 @@
 
 @interface AC34BoatLocation : NSObject
 
+
+
 @end

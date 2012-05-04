@@ -10,9 +10,11 @@
 
 #import "AC34.h"
 
+@class AC34BoatLocation;
+
 @interface AC34Boat : NSObject
 
-@property UInt32 sourceId;
+@property UInt32 sourceId; // Unique key
 @property (nonatomic, copy) NSString *hullNum;
 @property (nonatomic, copy) NSString *boatName;
 @property (nonatomic, copy) NSString *skipper;
@@ -29,9 +31,14 @@
 @property (nonatomic, copy) AC34Point3D *gpsPos;
 @property (nonatomic, copy) AC34Point3D *flagPos;
 
+@property (nonatomic, copy) AC34BoatLocation *lastLocation;
+@property (nonatomic, copy) NSDate *lastLocUpdateAt;
+
 - (id)initWithName:(NSString *)name;
 
 - (NSString *) displayName;
 - (NSString *) displaySubtitle;
+
+- (NSNumber *) key;
 
 @end

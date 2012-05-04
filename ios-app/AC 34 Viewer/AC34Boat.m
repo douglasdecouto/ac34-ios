@@ -20,6 +20,8 @@
 @synthesize hullShapes = _hullShapes;
 @synthesize gpsPos = _gpsPos;
 @synthesize flagPos = _flagPos;
+@synthesize lastLocation = _lastLocation;
+@synthesize lastLocUpdateAt = _lastLocUpdateAt;
 
 - (id) initWithName:(NSString *) name {
     
@@ -44,6 +46,9 @@
     
 }
 
+- (NSNumber *) key {
+    return [NSNumber numberWithUnsignedLong:self.sourceId];
+}
 
 
 @end

@@ -10,4 +10,5 @@
 
 @implementation AC34BoatLocation
 
+
 @end

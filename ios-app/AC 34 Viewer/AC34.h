@@ -48,3 +48,4 @@ enum AC34XmlType {
 - (AC34Point3D *) initWithX: (float) theX y:(float) theY z:(float) theZ;
 - (AC34Point2D *) point2D;
 @end
+

@@ -13,10 +13,11 @@
 @interface AC34BoatDataController : NSObject
 
 @property (nonatomic, copy) NSMutableArray *boatList;
-@property (nonatomic, copy) NSMutableDictionary *boatDict;
+@property (nonatomic, copy) NSMutableDictionary *boatDict; // keyed by NSNumber version of boat sourceId
 
 - (unsigned) countOfList;
-- (AC34Boat *) objectInListAtIndex:(unsigned) theIndex;
+- (AC34Boat *) objectInListAtIndex:(unsigned) thIndex;
+- (AC34Boat *) boatForSourceId:(UInt32) sourceId;
 - (void) addBoat:(AC34Boat *) theBoat;
 
 @end

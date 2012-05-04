@@ -10,6 +10,8 @@
 		68170486155469390053D656 /* yacht-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68170483155469390053D656 /* yacht-icon.png */; };
 		68170487155469390053D656 /* mark-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68170484155469390053D656 /* mark-icon.png */; };
 		68170488155469390053D656 /* umpire-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68170485155469390053D656 /* umpire-icon.png */; };
+		6817048A15547AED0053D656 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6817048915547AED0053D656 /* GLKit.framework */; };
+		6817048C15547AFB0053D656 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6817048B15547AFB0053D656 /* OpenGLES.framework */; };
 		682418E814F2EFC600E5D877 /* SMXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 682418E714F2EFC600E5D877 /* SMXMLDocument.m */; };
 		6895378414E96A6A0026F4CC /* AC34ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6895378214E96A6A0026F4CC /* AC34ThirdViewController.m */; };
 		6895378D14E9AE470026F4CC /* AC34Boat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6895378C14E9AE470026F4CC /* AC34Boat.m */; };
@@ -51,6 +53,8 @@
 		68170483155469390053D656 /* yacht-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "yacht-icon.png"; path = "../icons/yacht-icon.png"; sourceTree = "<group>"; };
 		68170484155469390053D656 /* mark-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mark-icon.png"; path = "../icons/mark-icon.png"; sourceTree = "<group>"; };
 		68170485155469390053D656 /* umpire-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "umpire-icon.png"; path = "../icons/umpire-icon.png"; sourceTree = "<group>"; };
+		6817048915547AED0053D656 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		6817048B15547AFB0053D656 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		682418E614F2EFC600E5D877 /* SMXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMXMLDocument.h; path = "../nfarina-xmldocument-5852d4c/SMXMLDocument.h"; sourceTree = "<group>"; };
 		682418E714F2EFC600E5D877 /* SMXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMXMLDocument.m; path = "../nfarina-xmldocument-5852d4c/SMXMLDocument.m"; sourceTree = "<group>"; };
 		6895378114E96A6A0026F4CC /* AC34ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AC34ThirdViewController.h; sourceTree = "<group>"; };
@@ -98,6 +102,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6817048C15547AFB0053D656 /* OpenGLES.framework in Frameworks */,
+				6817048A15547AED0053D656 /* GLKit.framework in Frameworks */,
 				68D0AFC314E8831A0084988D /* UIKit.framework in Frameworks */,
 				68D0AFC514E8831A0084988D /* Foundation.framework in Frameworks */,
 				68D0AFC714E8831A0084988D /* CoreGraphics.framework in Frameworks */,
@@ -139,6 +145,8 @@
 		68D0AFB314E8831A0084988D = {
 			isa = PBXGroup;
 			children = (
+				6817048B15547AFB0053D656 /* OpenGLES.framework */,
+				6817048915547AED0053D656 /* GLKit.framework */,
 				68170482155469230053D656 /* Icons */,
 				682418E114F2ECAC00E5D877 /* SMXMLDocument */,
 				68D0AFC814E8831A0084988D /* AC 34 Viewer */,
