@@ -112,6 +112,9 @@ def main():
             desired_message_delay = (timestamp - first_timestamp[src_id]).total_seconds()
             desired_message_delay *= args.speed
             
+            if desired_message_delay > 1.0:
+                desired_message_delay = 1.0;
+            
             if verbose:
                 print >>sys.stderr, "   %d last_ts=%s delay=%f" % \
                     (src_id, last_timestamp[src_id], desired_message_delay)
