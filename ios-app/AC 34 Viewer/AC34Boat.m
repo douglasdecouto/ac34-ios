@@ -7,6 +7,7 @@
 //
 
 #import "AC34Boat.h"
+#import "AC34BoatLocation.h"
 
 @implementation AC34Boat
 
@@ -34,16 +35,23 @@
 }
 
 - (NSString *) displayName {
-    return  self.boatName;
+    return [NSString stringWithFormat:@"[%lu] %@", self.sourceId, self.boatName];
 }
 
 - (NSString *) displaySubtitle {
-    if ([self.boatType isEqualToString:@"Yacht"])
-        return [NSString stringWithFormat:@"%@ %@ / %@ / %@", 
-                self.boatType, self.hullNum, self.skipper, self.country];
-    else
-        return [NSString stringWithFormat:@"%@ %@", self.boatType, self.hullNum];
-    
+    double lat = 0;
+    double lon = 0;
+    if (self.lastLocation != nil) {
+        lat = self.lastLocation.latitude;
+        lon = self.lastLocation.longitude;
+    }
+    if ([self.boatType isEqualToString:@"Yacht"]) {
+        return [NSString stringWithFormat:@"%@ %@ / %@ / %@ / lat=%f, lon=%f", 
+                self.boatType, self.hullNum, self.skipper, self.country, lat, lon];
+    }
+    else {
+        return [NSString stringWithFormat:@"%@ %@ / lat=%f, lon=%f", self.boatType, self.hullNum, lat, lon];
+    }
 }
 
 - (NSNumber *) key {

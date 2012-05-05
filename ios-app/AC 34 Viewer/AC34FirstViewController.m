@@ -7,8 +7,13 @@
 //
 
 #import "AC34FirstViewController.h"
+#import "AC34Boat.h"
+#import "AC34BoatLocation.h"
+#import "AC34BoatDataController.h"
 
 @implementation AC34FirstViewController
+
+@synthesize dataController = _dataController;
 
 - (void)didReceiveMemoryWarning
 {
@@ -18,7 +23,7 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
+- (void) viewDidLoad
 {
     [super viewDidLoad];
    
@@ -78,46 +83,99 @@
 
 - (void) glkViewControllerUpdate:(GLKViewController *) controller
 {
+/*    
     static float transY = 0.0f;
-    float y = sinf(transY)/2.0f;
+    float y = sinf(transY) / 2.0f;
     transY += 0.175f;
+*/    
+    // From above code looks like visible y-values are in +/- 1
     
+    float y = 0;
     GLKMatrix4 modelview = GLKMatrix4MakeTranslation(0, y, -5.0f);
     effect.transform.modelviewMatrix = modelview;
     
-    GLfloat ratio = self.view.bounds.size.width/self.view.bounds.size.height;
-    GLKMatrix4 projection = GLKMatrix4MakePerspective(45.0f, ratio, 0.1f, 20.0f);
+    GLfloat aspectRatio = self.view.bounds.size.width / self.view.bounds.size.height;
+    GLKMatrix4 projection = GLKMatrix4MakePerspective(45.0f, aspectRatio, 0.1f, 20.0f);
     effect.transform.projectionMatrix = projection;
+
+    // Work out bounding lat/lon
+    int nBoats = [self.dataController countOfList];
+    nBoatsWithLocs = 0;
+    for (int i = 0; i < nBoats; i++) {
+        AC34Boat *b = [self.dataController objectInListAtIndex:i];
+        AC34BoatLocation *l = b.lastLocation;
+        if (l == nil)
+            continue;
+        if (i == 0) {
+            minLat = maxLat = l.latitude;
+            minLon = maxLon = l.longitude;
+        }
+        else {
+            minLat = MIN(minLat, l.latitude);
+            maxLat = MAX(maxLat, l.latitude);
+            minLon = MIN(minLon, l.longitude);
+            maxLon = MAX(maxLon, l.longitude);
+        }
+        nBoatsWithLocs++;
+    }
+    
 }
 
 - (void) glkView:(GLKView *)view drawInRect:(CGRect) rect
 {
     [effect prepareToDraw];
+
+    double maxX = 1.0;
+    double minX = -1.0;
+    double maxY = 1.0;
+    double minY = -1.0;
     
-    static const GLfloat squareVertices[] = {
-        -0.5f, -0.5f, 1,
-        0.5f, -0.5f, 1,
-        -0.5f,  0.5f, 1,
-        0.5f,  0.5f, 1
-    };
-    
-    static const GLubyte squareColors[] = {
-        255, 255,   0, 255,
-        0,   255, 255, 255,
-        0,     0,   0,   0,
-        255,   0, 255, 255,
-    };
+    double dXdLon = (maxX - minX) / ((nBoatsWithLocs > 1) ? (maxLon - minLon) : 1.0);
+    double dYdLat = (maxY - minY) / ((nBoatsWithLocs > 1) ? (maxLat - minLat) : 1.0);
     
     glClear(GL_COLOR_BUFFER_BIT);
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
     glEnableVertexAttribArray(GLKVertexAttribColor);
     
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, squareVertices);
-    glVertexAttribPointer(GLKVertexAttribColor, 4, GL_UNSIGNED_BYTE, GL_TRUE, 0, squareColors);
+    int nBoats = [self.dataController countOfList];
+    for (int i = 0; i < nBoats; i++) {
+        AC34Boat *b = [self.dataController objectInListAtIndex:i];
+        //NSLog(@"Drawing boat %@", [b displayName]);
+        AC34BoatLocation *l = b.lastLocation;
+
+        double boatX = (nBoatsWithLocs > 1) ? (minX + dXdLon*(l.longitude - minLon)) : 0;
+        double boatY = (nBoatsWithLocs > 1) ? (minY + dYdLat*(l.latitude - minLat)) : 0;
+        
+        double eps = 0.05f; // half the length of square sides
     
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    
+        GLfloat squareVertices[4*3];
+        squareVertices[0] = -eps + boatX;
+        squareVertices[1] = -eps + boatY;
+        squareVertices[2] = 1;
+        squareVertices[3] = eps + boatX;
+        squareVertices[4] = -eps + boatY;
+        squareVertices[5] = 1;
+        squareVertices[6] = -eps + boatX;
+        squareVertices[7] = eps + boatY;
+        squareVertices[8] = 1;
+        squareVertices[9] = eps + boatX;
+        squareVertices[10] = eps + boatY;
+        squareVertices[11] = 1;
+                
+        static const GLubyte squareColors[] = {
+            255, 255,   0, 255,
+            0,   255, 255, 255,
+            0,     0,   0,   0,
+            255,   0, 255, 255,
+        };
+        
+        glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, squareVertices);
+        glVertexAttribPointer(GLKVertexAttribColor, 4, GL_UNSIGNED_BYTE, GL_TRUE, 0, squareColors);
+        
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    }
+        
     glDisableVertexAttribArray(GLKVertexAttribPosition);
     glDisableVertexAttribArray(GLKVertexAttribColor);
 }

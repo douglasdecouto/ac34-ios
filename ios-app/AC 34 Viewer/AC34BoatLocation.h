@@ -10,6 +10,10 @@
 
 @interface AC34BoatLocation : NSObject
 
-
+@property (nonatomic, copy) NSDate *locValidAt;
+@property UInt32 sourceIdOfPosition; // position is for boat with this ID.
+@property UInt32 seqNum;
+@property double latitude;
+@property double longitude;
 
 @end

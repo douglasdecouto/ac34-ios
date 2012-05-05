@@ -158,16 +158,25 @@
     NSString *chatter = [NSString stringWithFormat:@"Location update"];
     [self chatterFrom:sourceId at:timeStamp withType:kInternalChatter withChatter:chatter];
     
-    AC34Boat *b = [self.dataController boatForSourceId:sourceId];
+    // sourceId is sender of the message, but the location is actually
+    // for the boat whose ID is in the location.
+    UInt32 boatId = loc.sourceIdOfPosition;
+    
+    AC34Boat *b = [self.dataController boatForSourceId:boatId];
     if (b == nil) {
-        NSLog(@"Position update from unknown source %lu at %@", sourceId, timeStamp);
+        NSLog(@"Position update for unknown boat %lu at %@", boatId, timeStamp);
         return;
     }
     
     b.lastLocUpdateAt = timeStamp;
     b.lastLocation = loc;
     
+    NSLog(@"Position update from %lu for %@, %f, %f at %@", sourceId, [b displayName], loc.latitude, loc.longitude, timeStamp);
+    
     // XXX redraw display now!
+    [self.tableView reloadData];
+    
+    // somthing for the openGL view?
 }
 
 - (void) xmlFrom:(UInt32) sourceId at:(NSDate *) timeStamp 

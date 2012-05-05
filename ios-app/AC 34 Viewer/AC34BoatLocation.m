@@ -10,5 +10,10 @@
 
 @implementation AC34BoatLocation
 
+@synthesize locValidAt = _locValidAt;
+@synthesize sourceIdOfPosition = _sourceIdOfPosition;
+@synthesize seqNum = _seqNum;
+@synthesize latitude = _latitude;
+@synthesize longitude = _longitude;
 
 @end

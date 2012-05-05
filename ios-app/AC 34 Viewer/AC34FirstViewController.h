@@ -11,11 +11,19 @@
 
 // Followed tutorial at http://38leinad.wordpress.com/2011/10/19/practical-blender-with-glkit-part-1-introducing-glkit/
 
+@class AC34BoatDataController;
+
 // We are making the GLKViewController its own delegate.
 @interface AC34FirstViewController : GLKViewController <GLKViewControllerDelegate, GLKViewDelegate> {
 @private
     GLKBaseEffect *effect;
+    
+    // bounding box for lat/lon
+    double minLat, maxLat, minLon, maxLon;
+    int nBoatsWithLocs;
 }
+
+@property (nonatomic, retain) AC34BoatDataController *dataController;
 
 #pragma mark GLKViewControllerDelegate
 /* called each time before a new frame will be render. 

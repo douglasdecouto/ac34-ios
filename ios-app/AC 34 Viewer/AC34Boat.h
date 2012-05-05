@@ -31,10 +31,10 @@
 @property (nonatomic, copy) AC34Point3D *gpsPos;
 @property (nonatomic, copy) AC34Point3D *flagPos;
 
-@property (nonatomic, copy) AC34BoatLocation *lastLocation;
+@property (nonatomic, retain) AC34BoatLocation *lastLocation; // XXX if 'copy' insteady of retain, need to implement NSCopying on AC34BoatLocation
 @property (nonatomic, copy) NSDate *lastLocUpdateAt;
 
-- (id)initWithName:(NSString *)name;
+- (id) initWithName:(NSString *)name;
 
 - (NSString *) displayName;
 - (NSString *) displaySubtitle;

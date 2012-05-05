@@ -296,10 +296,26 @@ struct {
         return;
     }
     
-    AC34BoatLocation *boatLoc = [[AC34BoatLocation alloc] init];
+    AC34BoatLocation *l = [[AC34BoatLocation alloc] init];
+    
+    UInt32 version = body[0];
+    if (version != 1) {
+        NSLog(@"Location update from %lu wrong version, expected 1 but got %lu",
+              sourceId, version);
+        return;
+    }
+
+    l.locValidAt = [AC34StreamHandler timeStampFromBuf:(body + 1)];
+    l.sourceIdOfPosition = [AC34StreamHandler uInt32FromBuf:(body + 7)];
+    l.seqNum = [AC34StreamHandler uInt32FromBuf:(body + 11)];
+    UInt8 deviceType = body[15];
+    int32_t intLat = (int32_t) [AC34StreamHandler uInt32FromBuf:(body + 16)];
+    int32_t intLon = (int32_t) [AC34StreamHandler uInt32FromBuf:(body + 20)];
+    l.latitude = intLat / ((double) INT32_MAX);
+    l.longitude = intLon / ((double) INT32_MAX); 
     
     if (delegateRespondsTo.locationUpdateFrom)
-        [self.delegate locationUpdateFrom:sourceId at:timeStamp withLoc:boatLoc];
+        [self.delegate locationUpdateFrom:sourceId at:timeStamp withLoc:l];
 }
 
 

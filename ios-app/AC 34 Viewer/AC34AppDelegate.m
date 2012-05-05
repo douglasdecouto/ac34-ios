@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "AC34AppDelegate.h"
+#import "AC34FirstViewController.h"
 #import "AC34SecondViewController.h"
 #import "AC34BoatDataController.h"
 #import "AC34StreamHandler.h"
@@ -25,12 +26,18 @@
     
     // Note: we know the "SecondViewController" is at index 0 -- we re-ordered the tabs to make 'second' be first.
     AC34SecondViewController *secondViewController = (AC34SecondViewController *)[[navigationController viewControllers] objectAtIndex:0];
+    AC34FirstViewController *firstViewController = (AC34FirstViewController *) [[navigationController viewControllers] objectAtIndex:1];
     
     NSString *className = NSStringFromClass([secondViewController class]); 
     NSLog(@"Second controller class name %@", className);
-    
+
+    className = NSStringFromClass([firstViewController class]); 
+    NSLog(@"First controller class name %@", className);
+
     AC34BoatDataController *aDataController = [[AC34BoatDataController alloc] init];
+    firstViewController.dataController = aDataController;
     secondViewController.dataController = aDataController;
+    
     return YES;
 }
 							
