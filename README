@@ -1,0 +1,27 @@
+README for ac43 project.
+16 July 2012
+
+Douglas S. J. De Couto
+decouto@alum.mit.edu
+http://decouto.bm
+
+Introduction
+============
+
+This project ('ac34') is an iOS app -- mostly library code -- for
+connecting to, processing, and displaying the real-time or
+pre-recorded streaming telemetry data form the America's Cup 34
+servers.
+
+License
+=======
+
+This project is released under a BSD license.  See the LICENSE file
+for more details.
+
+
+Contact
+=======
+
+You can contact the author Douglas De Couto via email to
+decouto@alum.mit.edu.
