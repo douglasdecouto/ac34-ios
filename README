@@ -13,6 +13,13 @@ connecting to, processing, and displaying the real-time or
 pre-recorded streaming telemetry data form the America's Cup 34
 servers.
 
+*** Note: It's been a while since I have been working on this code and
+    I suspect the America's Cup team has changed their data feeds
+    around a bit, so check out their website.  The following link
+    *may* work for you:
+
+http://www.americascup.com/en/Discover/Documents/Race-Data/Data-API---Intro/
+
 License
 =======
 
