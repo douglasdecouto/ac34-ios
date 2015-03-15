@@ -1,0 +1,1 @@
+iOS code and library for connecting to and processing live and pre-recorded telemetry streams from the America's Cup 34 servers.  Also includes some Python utilities for debugging and playing back pre-recorded streams.
